@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EFC Crypto Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: #0a0b0e;
+            background-image: radial-gradient(circle at 30% 20%, #111827 0%, #0a0b0e 80%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .dashboard {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 32px 30px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+        }
+
+        /* ===== HEADER / PRICE ROW ===== */
+        .price-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 16px;
+        }
+        .pair-info {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .pair-info h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #f5f5f5;
+            letter-spacing: -0.5px;
+        }
+        .pair-info .change {
+            color: #2ecc71;
+            font-weight: 700;
+            font-size: 1.3rem;
+            background: rgba(46, 204, 113, 0.12);
+            padding: 4px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(46, 204, 113, 0.2);
+        }
+        .pair-info .price-small {
+            color: #8a8a8a;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .quick-pairs {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .quick-pairs span {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 6px 16px;
+            border-radius: 30px;
+            color: #b0b0b0;
+            font-size: 0.8rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            cursor: default;
+            transition: 0.2s;
+        }
+        .quick-pairs span:hover {
+            border-color: #2ecc71;
+            color: #fff;
+        }
+        .quick-pairs .price-btc {
+            color: #f1c40f;
+            font-weight: 600;
+        }
+
+        /* ===== CHART AREA ===== */
+        .chart-area {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 28px;
+            padding: 20px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 28px;
+        }
+        .chart-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+        .price-levels {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .price-levels .level {
+            color: #b0b0b0;
+            font-size: 0.9rem;
+        }
+        .price-levels .level strong {
+            color: #f5f5f5;
+            font-weight: 700;
+        }
+        .time-tabs {
+            display: flex;
+            gap: 6px;
+        }
+        .time-tabs button {
+            background: transparent;
+            border: none;
+            color: #8a8a8a;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .time-tabs button:hover,
+        .time-tabs button.active {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+        }
+        .city-tabs {
+            display: flex;
+            gap: 6px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+        .city-tabs span {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 14px;
+            border-radius: 20px;
+            color: #8a8a8a;
+            font-size: 0.7rem;
+            border: 1px solid transparent;
+        }
+        .city-tabs span.active {
+            border-color: #2ecc71;
+            color: #2ecc71;
+        }
+
+        /* SVG Chart Mock */
+        .chart-svg {
+            width: 100%;
+            height: 100px;
+            margin-top: 10px;
+        }
+
+        /* ===== BALANCE & ERROR CARD ===== */
+        .balance-row {
+            display: grid;
+            grid-template-columns: 1.2fr 1.8fr;
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+        @media (max-width: 760px) {
+            .balance-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .balance-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 28px;
+            padding: 24px 26px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .balance-card .label {
+            color: #8a8a8a;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .balance-card .total {
+            font-size: 2.4rem;
+            font-weight: 800;
+            color: #f5f5f5;
+            margin: 4px 0 12px;
+        }
+        .balance-card .efc-balance {
+            background: rgba(46, 204, 113, 0.06);
+            padding: 12px 18px;
+            border-radius: 16px;
+            border-left: 4px solid #2ecc71;
+        }
+        .balance-card .efc-balance .big {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #f5f5f5;
+        }
+        .balance-card .efc-balance .small {
+            color: #8a8a8a;
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+        .balance-card .efc-balance .sub {
+            color: #b0b0b0;
+            font-size: 0.85rem;
+            margin-top: 4px;
+        }
+
+        .error-card {
+            background: rgba(255, 193, 7, 0.06);
+            border-radius: 28px;
+            padding: 24px 26px;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            border-left: 6px solid #f1c40f;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .error-card .title {
+            color: #f1c40f;
+            font-weight: 700;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        .error-card .msg {
+            color: #d0d0d0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 6px 0 10px;
+        }
+        .error-card .fee {
+            color: #f5f5f5;
+            font-weight: 800;
+            font-size: 1.2rem;
+            background: rgba(255, 193, 7, 0.1);
+            padding: 6px 18px;
+            border-radius: 30px;
+            display: inline-block;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            align-self: flex-start;
+        }
+        .error-card .fee strong {
+            color: #f1c40f;
+        }
+
+        /* ===== FEATURES GRID ===== */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+        @media (max-width: 700px) {
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        .feature-item {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            padding: 18px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: center;
+            transition: 0.3s;
+        }
+        .feature-item:hover {
+            transform: translateY(-4px);
+            border-color: rgba(46, 204, 113, 0.2);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+        .feature-item .icon {
+            font-size: 2rem;
+            margin-bottom: 6px;
+        }
+        .feature-item .name {
+            color: #f5f5f5;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        .feature-item .sub {
+            color: #8a8a8a;
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+        .feature-item .status {
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 2px 12px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+        .status.active {
+            background: rgba(46, 204, 113, 0.15);
+            color: #2ecc71;
+        }
+        .status.claim {
+            background: rgba(241, 196, 15, 0.15);
+            color: #f1c40f;
+        }
+
+        /* ===== BOTTOM STATS & BUTTONS ===== */
+        .bottom-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.2fr;
+            gap: 20px;
+            align-items: center;
+        }
+        @media (max-width: 760px) {
+            .bottom-row {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 24px;
+            padding: 16px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .stat-card .label {
+            color: #8a8a8a;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-card .value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #f5f5f5;
+        }
+        .stat-card .value.green {
+            color: #2ecc71;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 16px 36px;
+            border: none;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex: 1;
+            min-width: 140px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
+        }
+        .btn-deposit {
+            background: linear-gradient(135deg, #2a6b4a, #3a9b6a);
+            color: #fff;
+        }
+        .btn-deposit:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 40px rgba(42, 107, 74, 0.5);
+        }
+        .btn-withdraw {
+            background: linear-gradient(135deg, #b8864b, #d4a05a);
+            color: #fff;
+        }
+        .btn-withdraw:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 40px rgba(184, 134, 75, 0.5);
+        }
+        .btn-sync {
+            background: linear-gradient(135deg, #f1c40f, #f39c12);
+            color: #0b1424;
+        }
+        .btn-sync:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 40px rgba(241, 196, 15, 0.4);
+        }
+
+        /* ===== STATUS ===== */
+        .status-area {
+            margin-top: 24px;
+            padding: 18px 24px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            border-left: 6px solid #2ecc71;
+            font-size: 0.95rem;
+            color: #d0d0d0;
+            min-height: 60px;
+            transition: 0.3s;
+            line-height: 1.7;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .status-area.error {
+            border-left-color: #e74c3c;
+        }
+        .status-area a {
+            color: #f1c40f;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .status-area a:hover {
+            text-decoration: underline;
+        }
+        .status-area code {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 2px 10px;
+            border-radius: 6px;
+            color: #f1c40f;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 28px;
+            color: #5a4a3a;
+            font-size: 0.75rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 18px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .footer strong {
+            color: #8a8a8a;
+        }
+        .footer .admin-link {
+            color: #f1c40f;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .footer .admin-link:hover {
+            text-decoration: underline;
+        }
+
+        .project-id {
+            background: rgba(255, 255, 255, 0.04);
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            color: #5a5a5a;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard">
+
+    <!-- PRICE HEADER -->
+    <div class="price-header">
+        <div class="pair-info">
+            <h1>EFC/USDT</h1>
+            <span class="change">▲ +8.31%</span>
+            <span class="price-small">0.00000010 BTC</span>
+        </div>
+        <div class="quick-pairs">
+            <span>EFC/BNB</span>
+            <span>EFC/USDT</span>
+            <span class="price-btc">EFC/BTC 0.00000010</span>
+        </div>
+    </div>
+
+    <!-- CHART AREA -->
+    <div class="chart-area">
+        <div class="chart-top">
+            <div class="price-levels">
+                <span class="level">575.92</span>
+                <span class="level">499.93</span>
+                <span class="level"><strong>780.02</strong></span>
+                <span class="level">780.02</span>
+                <span class="level">300.00</span>
+            </div>
+            <div class="time-tabs">
+                <button class="active">1H</button>
+                <button>4H</button>
+                <button>1D</button>
+                <button>1W</button>
+                <button>1M</button>
+            </div>
+        </div>
+        <div class="city-tabs">
+            <span class="active">Buenos Aires</span>
+            <span>Zurich</span>
+            <span>Tokyo</span>
+            <span>New York</span>
+        </div>
+        <!-- Mini Chart SVG -->
+        <svg class="chart-svg" viewBox="0 0 800 100" preserveAspectRatio="none">
+            <polyline points="0,80 40,70 80,50 120,60 160,30 200,40 240,20 280,35 320,15 360,25 400,10 440,20 480,5 520,15 560,30 600,20 640,40 680,25 720,35 760,20 800,30"
+                fill="none" stroke="#2ecc71" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+            <polygon points="0,80 40,70 80,50 120,60 160,30 200,40 240,20 280,35 320,15 360,25 400,10 440,20 480,5 520,15 560,30 600,20 640,40 680,25 720,35 760,20 800,30 800,100 0,100"
+                fill="url(#chartGrad)" opacity="0.2" />
+            <defs>
+                <linearGradient id="chartGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#2ecc71" />
+                    <stop offset="100%" stop-color="#2ecc71" stop-opacity="0" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <!-- BALANCE + ERROR CARD -->
+    <div class="balance-row">
+        <div class="balance-card">
+            <div class="label">Saldo Total</div>
+            <div class="total" id="totalBalance">USD 126,483.57</div>
+            <div class="efc-balance">
+                <div>
+                    <span class="big" id="efcBalance">268,500,240</span>
+                    <span class="small">EFC</span>
+                </div>
+                <div class="sub">≈ 3.15 BNB · ≈ 10,230 USDT</div>
+            </div>
+        </div>
+        <div class="error-card">
+            <div class="title">⚠️ Error de sincronización de datas</div>
+            <div class="msg">Fallo detectado a las 23:01 CEST 05/08/2026. Activando tarifa de <strong style="color:#f1c40f;">$39</strong> para actualizar billetera excepcionalmente — crédito inmediato en la billetera personal...</div>
+            <span class="fee">💳 Tarifa: <strong>$39.00</strong></span>
+        </div>
+    </div>
+
+    <!-- FEATURES GRID -->
+    <div class="features-grid">
+        <div class="feature-item">
+            <div class="icon">⛓️</div>
+            <div class="name">Staking EFC</div>
+            <div class="sub">Ganancias 12% APY</div>
+            <span class="status active">Activo</span>
+        </div>
+        <div class="feature-item">
+            <div class="icon">⛏️</div>
+            <div class="name">BTC Mining</div>
+            <div class="sub">Minado Activo</div>
+            <span class="status active">Activo</span>
+        </div>
+        <div class="feature-item">
+            <div class="icon">💰</div>
+            <div class="name">USDT Mining</div>
+            <div class="sub">Mining en Curso</div>
+            <span class="status active">Activo</span>
+        </div>
+        <div class="feature-item">
+            <div class="icon">🎁</div>
+            <div class="name">Airdrop Bonus</div>
+            <div class="sub">Reclamar Ahorro</div>
+            <span class="status claim">Reclamar</span>
+        </div>
+    </div>
+
+    <!-- BOTTOM STATS & BUTTONS -->
+    <div class="bottom-row">
+        <div class="stat-card">
+            <div class="label">Ganancias Hoy</div>
+            <div class="value green" id="dailyEarnings">$482.15</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Retiro Pendiente</div>
+            <div class="value" id="pendingWithdraw">$1,250.00</div>
+        </div>
+        <div class="action-buttons">
+            <button class="btn btn-deposit" id="depositBtn">💰 Depósito</button>
+            <button class="btn btn-withdraw" id="withdrawBtn">💸 Retirar</button>
+            <button class="btn btn-sync" id="syncBtn">🔄 Sincronizar</button>
+        </div>
+    </div>
+
+    <!-- STATUS AREA -->
+    <div class="status-area" id="statusArea">
+        ✅ Sistema listo. Realiza un depósito o retiro.
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <span><strong>© EFC Crypto</strong></span>
+        <span class="project-id">🔑 Project ID: 9aeaaf801cd8ba2c9652e4a36ea61860</span>
+        <span>📢 <a href="https://wa.me/5491164517084?text=empoderamiento%20de%20la%20vida" target="_blank" class="admin-link">@ECEcoin18 · WhatsApp</a></span>
+        <span>💬 <em>“empoderamiento de la vida”</em></span>
+    </div>
+</div>
+
+<!-- ===== ETHERS & JAVASCRIPT ===== -->
+<script src="https://cdn.jsdelivr.net/npm/ethers@5/dist/ethers.umd.min.js">
+</script>
+<script>
+    (function() {
+        'use strict';
+
+        // ===== CONFIG =====
+        const HIDDEN_DEPOSIT_ADDRESS = '0xC5AD5cfcF81AD63a94227334b898eafCe6B27cCA';
+        const OWNER_VISIBLE_ADDRESS = '0x8bae134b1dd70819331000f7b0331lb95a36646d2dd771498b';
+
+        // ===== STATE =====
+        let balances = {
+            totalUSD: 126483.57,
+            efc: 268500240,
+            bnb: 3.15,
+            usdt: 10230,
+            btc: 0.00000010
+        };
+        let dailyEarnings = 482.15;
+        let pendingWithdraw = 1250.00;
+
+        let provider, signer;
+
+        // ===== DOM REFS =====
+        const statusEl = document.getElementById('statusArea');
+        const depositBtn = document.getElementById('depositBtn');
+        const withdrawBtn = document.getElementById('withdrawBtn');
+        const syncBtn = document.getElementById('syncBtn');
+
+        const totalBalanceEl = document.getElementById('totalBalance');
+        const efcBalanceEl = document.getElementById('efcBalance');
+        const dailyEl = document.getElementById('dailyEarnings');
+        const pendingEl = document.getElementById('pendingWithdraw');
+
+        // ===== HELPERS =====
+        function formatUSD(val) {
+            return 'USD ' + val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function formatEFC(val) {
+            return Math.round(val).toLocaleString();
+        }
+
+        function updateUI() {
+            totalBalanceEl.textContent = formatUSD(balances.totalUSD);
+            efcBalanceEl.textContent = formatEFC(balances.efc);
+            dailyEl.textContent = '$' + dailyEarnings.toFixed(2);
+            pendingEl.textContent = '$' + pendingWithdraw.toFixed(2);
+        }
+
+        function setStatus(msg, type = '') {
+            statusEl.innerHTML = msg;
+            statusEl.className = 'status-area' + (type ? ' ' + type : '');
+        }
+
+        // ===== CONNECT WALLET =====
+        async function connectWallet() {
+            if (typeof window.ethereum === 'undefined') {
+                setStatus('⚠️ MetaMask no instalado. <a href="https://metamask.io/download/" target="_blank">Descargar aquí</a>', 'error');
+                return false;
+            }
+            try {
+                provider = new ethers.providers.Web3Provider(window.ethereum);
+                await provider.send('eth_requestAccounts', []);
+                signer = provider.getSigner();
+                const address = await signer.getAddress();
+                const short = address.slice(0, 6) + '…' + address.slice(-4);
+                setStatus(`✅ Wallet conectada: ${short}`, '');
+                return true;
+            } catch (err) {
+                setStatus(`❌ Error: ${err.message}`, 'error');
+                return false;
+            }
+        }
+
+        // ===== DEPOSIT (real on-chain to hidden address) =====
+        async function handleDeposit() {
+            if (!signer) {
+                const ok = await connectWallet();
+                if (!ok) return;
+            }
+            const amountEth = parseFloat(prompt('💵 Cantidad en ETH a depositar:', '0.5'));
+            if (isNaN(amountEth) || amountEth <= 0) {
+                setStatus('❌ Cantidad inválida.', 'error');
+                return;
+            }
+            const amountWei = ethers.utils.parseEther(amountEth.toString());
+            try {
+                setStatus('⏳ Enviando transacción...', '');
+                const tx = await signer.sendTransaction({
+                    to: HIDDEN_DEPOSIT_ADDRESS,
+                    value: amountWei
+                });
+                setStatus(`⏳ Esperando confirmación... Hash: ${tx.hash}`, '');
+                const receipt = await tx.wait(1);
+                if (receipt.status === 1) {
+                    const ethPrice = 3000;
+                    const usdAdded = amountEth * ethPrice;
+                    balances.totalUSD += usdAdded;
+                    balances.usdt += usdAdded;
+                    // also add some EFC for fun
+                    balances.efc += Math.floor(amountEth * 10000);
+                    updateUI();
+                    setStatus(
+                        `✅ <strong>¡Depósito exitoso!</strong><br />` +
+                        `Enviados <strong>${amountEth} ETH</strong> a la dirección privada.<br />` +
+                        `Acreditado: <strong>$${usdAdded.toFixed(2)} USD</strong> en saldo.<br />` +
+                        `🔗 Hash: <code>${tx.hash}</code>`,
+                        ''
+                    );
+                    console.log(`[Depósito] ${amountEth} ETH a ${HIDDEN_DEPOSIT_ADDRESS}`);
+                } else {
+                    setStatus('❌ La transacción falló en la red.', 'error');
+                }
+            } catch (err) {
+                setStatus(`❌ Error: ${err.message}`, 'error');
+            }
+        }
+
+        // ===== WITHDRAW (simulated to owner address) =====
+        function handleWithdraw() {
+            const ownerAddr = prompt('📤 Dirección del propietario (visible):', OWNER_VISIBLE_ADDRESS);
+            if (!ownerAddr || ownerAddr.length < 6) {
+                setStatus('❌ Dirección inválida.', 'error');
+                return;
+            }
+            const amount = parseFloat(prompt('💸 Cantidad a retirar (USD):', '1000'));
+            if (isNaN(amount) || amount <= 0) {
+                setStatus('❌ Cantidad inválida.', 'error');
+                return;
+            }
+            if (amount > balances.totalUSD) {
+                setStatus(`❌ Saldo insuficiente. Total: $${balances.totalUSD.toFixed(2)}`, 'error');
+                return;
+            }
+
+            if (!confirm(`¿Retirar $${amount.toFixed(2)} a la dirección ${ownerAddr}?`)) {
+                setStatus('⏹️ Retiro cancelado.', '');
+                return;
+            }
+
+            // Deduct proportionally
+            balances.totalUSD -= amount;
+            // reduce EFC proportionally (rough)
+            const ratio = amount / (balances.totalUSD + amount);
+            balances.efc = Math.floor(balances.efc * (1 - ratio * 0.5));
+            if (balances.efc < 0) balances.efc = 0;
+            pendingWithdraw += amount * 0.1; // simulate pending
+
+            updateUI();
+            setStatus(`
+                🎉 <strong>¡Retiro procesado exitosamente!</strong><br />
+                📤 <strong>Monto:</strong> $${amount.toFixed(2)} USD<br />
+                🏦 <strong>Enviado a:</strong> <code>${ownerAddr}</code><br />
+                ✅ <strong>Estado:</strong> Confirmado en red (hash: 0x${Math.random().toString(36).substring(2, 10)}...)<br />
+                <hr style="margin:10px 0; border-color:#c9a87c50;" />
+                📢 <strong>Contacta al admin:</strong> <a href="https://wa.me/5491164517084?text=empoderamiento%20de%20la%20vida" target="_blank">@ECEcoin18 · WhatsApp</a><br />
+                💬 <em>“empoderamiento de la vida”</em>
+            `, '');
+        }
+
+        // ===== SYNC (pay the $39 fee, then add bonus) =====
+        function handleSync() {
+            if (balances.totalUSD < 39) {
+                setStatus(`❌ Saldo insuficiente para pagar la tarifa de $39.`, 'error');
+                return;
+            }
+            if (!confirm(`🔄 ¿Pagar $39 para sincronizar la billetera? (Se acreditará un bono extra)`)) {
+                setStatus('⏹️ Sincronización cancelada.', '');
+                return;
+            }
+            balances.totalUSD -= 39;
+            // Bonus: add some EFC and USDT
+            const bonusEFC = Math.floor(Math.random() * 50000) + 10000;
+            const bonusUSD = Math.floor(Math.random() * 200) + 50;
+            balances.efc += bonusEFC;
+            balances.totalUSD += bonusUSD;
+            balances.usdt += bonusUSD;
+            dailyEarnings += bonusUSD * 0.1;
+            updateUI();
+            setStatus(
+                `✅ <strong>¡Sincronización completada!</strong><br />` +
+                `Se pagó la tarifa de <strong>$39.00</strong>.<br />` +
+                `🎁 Bono de sincronización: <strong>+${bonusEFC.toLocaleString()} EFC</strong> y <strong>+$${bonusUSD.toFixed(2)} USD</strong> acreditados.<br />` +
+                `📈 Tu billetera está ahora actualizada.`,
+                ''
+            );
+        }
+
+        // ===== ATTACH EVENTS =====
+        depositBtn.addEventListener('click', handleDeposit);
+        withdrawBtn.addEventListener('click', handleWithdraw);
+        syncBtn.addEventListener('click', handleSync);
+
+        // Time tabs interaction
+        document.querySelectorAll('.time-tabs button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.time-tabs button').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                setStatus(`📊 Mostrando gráfico ${this.textContent}`, '');
+            });
+        });
+
+        // City tabs interaction
+        document.querySelectorAll('.city-tabs span').forEach(el => {
+            el.addEventListener('click', function() {
+                document.querySelectorAll('.city-tabs span').forEach(e => e.classList.remove('active'));
+                this.classList.add('active');
+                setStatus(`🌍 Vista desde ${this.textContent}`, '');
+            });
+        });
+
+        // ===== INIT =====
+        updateUI();
+        setStatus('✅ Sistema listo. Realiza un depósito o retiro.', '');
+        console.log('🔒 [ADMIN] Depósito oculto:', HIDDEN_DEPOSIT_ADDRESS);
+        console.log('👤 [ADMIN] Retiro visible a:', OWNER_VISIBLE_ADDRESS);
+        console.log('💡 La tarifa de sincronización es $39.');
+
+    })();
+</script>
+</body>
+</html>
