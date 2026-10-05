@@ -1,905 +1,899 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Marcelo Investment – Withdrawals Dashboard</title>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <!-- Google Translate -->
-    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Marcelo Investment – Withdrawals Dashboard</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter','Segoe UI',system-ui,sans-serif; }
 
-        body {
-            background: #0a0b0e;
-            background-image: radial-gradient(circle at 30% 20%, #1a1f2e 0%, #0a0b0e 80%);
-            min-height: 100vh;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
+  body {
+    background:#0a0b0e;
+    background-image: radial-gradient(circle at 30% 20%, #1a1f2e 0%, #0a0b0e 80%);
+    min-height:100vh; padding:20px; display:flex; justify-content:center;
+  }
 
-        .dashboard {
-            max-width: 1200px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 48px;
-            padding: 36px 34px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
-        }
+  .dashboard {
+    max-width:1200px; width:100%;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border-radius:48px; padding:36px 34px;
+    border:1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.9);
+  }
 
-        /* ===== HEADER ===== */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 16px;
-        }
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-        .header-left h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #f5e6d3, #ffd78a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-        }
-        .header-left h1 small {
-            font-size: 0.9rem;
-            font-weight: 400;
-            -webkit-text-fill-color: #b0b0b0;
-            display: block;
-        }
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-wrap: wrap;
-        }
-        .header-right .badge-kyc {
-            background: linear-gradient(135deg, #f1c40f, #f39c12);
-            color: #0b1424;
-            padding: 6px 18px;
-            border-radius: 40px;
-            font-weight: 800;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            box-shadow: 0 0 30px rgba(241, 196, 15, 0.3);
-            border: 1px solid #f1c40f;
-        }
-        #google_translate_element {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 30px;
-            padding: 4px 8px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .goog-te-gadget {
-            color: #fff !important;
-            font-family: inherit !important;
-        }
-        .goog-te-gadget select {
-            background: transparent;
-            color: #fff;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            outline: none;
-            cursor: pointer;
-        }
-        .goog-te-gadget select option {
-            background: #1a1f2e;
-            color: #fff;
-        }
-        .goog-te-gadget .goog-te-gadget-simple {
-            background: transparent !important;
-            border: none !important;
-            padding: 0 !important;
-        }
+  /* HEADER */
+  .header { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+    margin-bottom:28px; border-bottom:1px solid rgba(255,255,255,0.05); padding-bottom:16px; gap:14px; }
+  .header-left h1 { font-size:2rem; font-weight:800;
+    background:linear-gradient(135deg,#f5e6d3,#ffd78a);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; letter-spacing:-0.5px; }
+  .header-left h1 small { font-size:0.9rem; font-weight:400; -webkit-text-fill-color:#b0b0b0; display:block; }
+  .header-right { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
+  .badge-kyc {
+    background:linear-gradient(90deg,#f1c40f,#f39c12,#f1c40f);
+    background-size:200% auto; animation: shimmer 3s linear infinite;
+    color:#0b1424; padding:6px 18px; border-radius:40px; font-weight:800; font-size:0.75rem;
+    text-transform:uppercase; box-shadow:0 0 30px rgba(241,196,15,0.3); border:1px solid #f1c40f;
+  }
+  @keyframes shimmer { 0%{background-position:-200% center;} 100%{background-position:200% center;} }
 
-        /* ===== PROFILE CARD ===== */
-        .profile-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 32px;
-            padding: 24px 28px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 32px;
-            gap: 20px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
-        }
-        .profile-left {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .profile-photo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 4px solid #f1c40f;
-            overflow: hidden;
-            box-shadow: 0 0 40px rgba(241, 196, 15, 0.2);
-            flex-shrink: 0;
-        }
-        .profile-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .profile-info .name {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: #f5f5f5;
-            letter-spacing: -0.5px;
-        }
-        .profile-info .name small {
-            font-weight: 400;
-            font-size: 0.9rem;
-            color: #b0b0b0;
-            margin-left: 8px;
-        }
-        .profile-info .status {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 4px;
-            flex-wrap: wrap;
-        }
-        .profile-info .status .verified {
-            background: rgba(46, 204, 113, 0.15);
-            color: #2ecc71;
-            padding: 4px 16px;
-            border-radius: 30px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            border: 1px solid #2ecc71;
-        }
-        .profile-info .status .label {
-            color: #8a8a8a;
-            font-size: 0.8rem;
-        }
-        .profile-right {
-            text-align: right;
-        }
-        .profile-right .balance-label {
-            color: #8a8a8a;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        .profile-right .balance-amount {
-            font-size: 2.8rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #f5e6d3, #ffd78a);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .profile-right .balance-amount small {
-            font-size: 1.2rem;
-            font-weight: 400;
-            -webkit-text-fill-color: #b0b0b0;
-        }
+  #google_translate_element {
+    background: rgba(255,255,255,0.05); border-radius:30px; padding:4px 10px;
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  .goog-te-gadget { color:#fff !important; font-family:inherit !important; font-size:0 !important; }
+  .goog-te-gadget .goog-te-gadget-simple {
+    background: transparent !important; border: none !important; padding: 0 !important;
+  }
+  .goog-te-gadget .goog-te-gadget-simple span { font-size: 0.85rem !important; color: #fff !important; }
+  .goog-te-gadget img { display: none; }
 
-        /* ===== STATS ROW ===== */
-        .stats-row {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin-bottom: 32px;
-        }
-        @media (max-width: 700px) {
-            .stats-row {
-                grid-template-columns: 1fr;
-            }
-        }
-        .stat-box {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 24px;
-            padding: 18px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            text-align: center;
-            transition: 0.3s;
-        }
-        .stat-box:hover {
-            transform: translateY(-3px);
-            border-color: rgba(241, 196, 15, 0.2);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-        }
-        .stat-box .number {
-            font-size: 2.2rem;
-            font-weight: 800;
-            color: #f5f5f5;
-        }
-        .stat-box .number.green {
-            color: #2ecc71;
-        }
-        .stat-box .number.gold {
-            color: #f1c40f;
-        }
-        .stat-box .label {
-            color: #8a8a8a;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 2px;
-        }
+  /* PROFILE */
+  .profile-card {
+    background: rgba(255,255,255,0.03); border-radius:32px; padding:24px 28px;
+    border:1px solid rgba(255,255,255,0.06); display:flex; flex-wrap:wrap;
+    align-items:center; justify-content:space-between; margin-bottom:24px; gap:20px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+  }
+  .profile-left { display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .profile-photo {
+    width:80px; height:80px; border-radius:50%; border:4px solid #f1c40f; overflow:hidden;
+    box-shadow:0 0 40px rgba(241,196,15,0.25); flex-shrink:0;
+    animation: glowPulse 3s infinite;
+  }
+  @keyframes glowPulse {
+    0%{box-shadow:0 0 20px rgba(241,196,15,0.1);}
+    50%{box-shadow:0 0 50px rgba(241,196,15,0.35);}
+    100%{box-shadow:0 0 20px rgba(241,196,15,0.1);}
+  }
+  .profile-photo img { width:100%; height:100%; object-fit:cover; display:block; }
+  .profile-info .name { font-size:1.8rem; font-weight:800; color:#f5f5f5; letter-spacing:-0.5px; }
+  .profile-info .name small { font-weight:400; font-size:0.9rem; color:#b0b0b0; margin-left:8px; }
+  .profile-info .status { display:flex; align-items:center; gap:12px; margin-top:6px; flex-wrap:wrap; }
+  .profile-info .status .verified {
+    background:rgba(46,204,113,0.15); color:#2ecc71; padding:4px 16px; border-radius:30px;
+    font-weight:700; font-size:0.85rem; border:1px solid #2ecc71;
+  }
+  .profile-info .status .label { color:#8a8a8a; font-size:0.8rem; }
+  .profile-right { text-align:right; }
+  .profile-right .balance-label { color:#8a8a8a; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; }
+  .profile-right .balance-amount {
+    font-size:2.8rem; font-weight:800;
+    background:linear-gradient(135deg,#f5e6d3,#ffd78a);
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  }
+  .profile-right .balance-amount small { font-size:1.2rem; font-weight:400; -webkit-text-fill-color:#b0b0b0; }
 
-        /* ===== TABLE SECTION ===== */
-        .table-section {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 28px;
-            padding: 22px 24px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 32px;
-            overflow-x: auto;
-        }
-        .table-section h3 {
-            color: #f5f5f5;
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            border-left: 4px solid #f1c40f;
-            padding-left: 14px;
-        }
-        .table-section table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-        }
-        .table-section th {
-            text-align: left;
-            padding: 12px 10px;
-            color: #8a8a8a;
-            font-weight: 600;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.5px;
-        }
-        .table-section td {
-            padding: 12px 10px;
-            color: #d0d0d0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-        .table-section .status-pending {
-            color: #f1c40f;
-            font-weight: 600;
-        }
-        .table-section .status-completed {
-            color: #2ecc71;
-            font-weight: 600;
-        }
-        .table-section tr:hover td {
-            background: rgba(255, 255, 255, 0.02);
-        }
-        .table-section .moneda-icon {
-            display: inline-block;
-            width: 28px;
-            height: 28px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 50%;
-            text-align: center;
-            line-height: 28px;
-            font-size: 0.8rem;
-            margin-right: 8px;
-        }
+  /* COIN GRID – UNLIMITED FIGURES */
+  .coin-grid {
+    display:grid; grid-template-columns:repeat(5, 1fr); gap:16px;
+    margin-bottom:24px;
+  }
+  @media (max-width:900px){ .coin-grid { grid-template-columns:repeat(3,1fr);} }
+  @media (max-width:600px){ .coin-grid { grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:400px){ .coin-grid { grid-template-columns:1fr;} }
 
-        /* ===== DEPOSIT & WITHDRAW CARDS ===== */
-        .action-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            margin-bottom: 32px;
-        }
-        @media (max-width: 760px) {
-            .action-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        .action-card {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 28px;
-            padding: 24px 26px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(4px);
-        }
-        .action-card h3 {
-            color: #f5f5f5;
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            border-left: 4px solid #c9a87c;
-            padding-left: 14px;
-        }
-        .action-card .field {
-            margin-bottom: 14px;
-        }
-        .action-card .field label {
-            display: block;
-            color: #b0b0b0;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-        .action-card .field input,
-        .action-card .field select {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(0, 0, 0, 0.3);
-            color: #f5f5f5;
-            font-size: 0.95rem;
-            outline: none;
-            transition: 0.3s;
-        }
-        .action-card .field input:focus,
-        .action-card .field select:focus {
-            border-color: #f1c40f;
-            box-shadow: 0 0 30px rgba(241, 196, 15, 0.05);
-        }
-        .action-card .field select option {
-            background: #1a1f2e;
-            color: #f5f5f5;
-        }
-        .action-card .btn-action {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 60px;
-            font-weight: 800;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-top: 6px;
-        }
-        .btn-deposit {
-            background: linear-gradient(135deg, #2a6b4a, #3a9b6a);
-            color: #fff;
-        }
-        .btn-deposit:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(42, 107, 74, 0.4);
-        }
-        .btn-withdraw {
-            background: linear-gradient(135deg, #b8864b, #d4a05a);
-            color: #fff;
-        }
-        .btn-withdraw:hover {
-            transform: scale(1.02);
-            box-shadow: 0 8px 30px rgba(184, 134, 75, 0.4);
-        }
+  .coin-card {
+    background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015));
+    border-radius:24px; padding:18px 14px;
+    border:1px solid rgba(255,255,255,0.07);
+    text-align:center; transition:0.35s ease;
+    position:relative; overflow:hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+  .coin-card::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(circle at top, rgba(241,196,15,0.08), transparent 70%);
+    opacity:0; transition:0.4s; pointer-events:none;
+  }
+  .coin-card:hover::before { opacity:1; }
+  .coin-card:hover {
+    transform:translateY(-6px);
+    border-color: rgba(241,196,15,0.35);
+    box-shadow: 0 14px 40px rgba(241,196,15,0.15);
+  }
+  .coin-card .coin-icon {
+    width:42px; height:42px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 10px; font-size:1.3rem; font-weight:800;
+    border:2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+  }
+  .coin-card .coin-symbol {
+    color:#c9a87c; font-size:0.85rem; font-weight:700;
+    letter-spacing:1px; text-transform:uppercase;
+  }
+  .coin-card .coin-balance {
+    color:#f5f5f5; font-weight:800; font-size:1.25rem;
+    margin:6px 0 4px; letter-spacing:-0.3px;
+    line-height:1.15;
+  }
+  .coin-card .coin-balance small {
+    display:block; font-size:0.7rem; font-weight:500;
+    color:#8a8a8a; margin-top:2px; letter-spacing:0.5px;
+  }
+  .coin-card .coin-change {
+    font-size:0.72rem; font-weight:700;
+    padding:3px 12px; border-radius:30px;
+    display:inline-block; margin-top:4px;
+  }
+  .coin-change.up { background:rgba(46,204,113,0.15); color:#2ecc71; }
+  .coin-change.down { background:rgba(231,76,60,0.15); color:#e74c3c; }
 
-        .address-box {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 16px;
-            padding: 14px 18px;
-            margin: 12px 0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-        }
-        .address-box code {
-            color: #ffd78a;
-            font-family: monospace;
-            font-size: 0.85rem;
-            word-break: break-all;
-        }
-        .address-box .copy-btn {
-            background: rgba(255, 255, 255, 0.06);
-            border: none;
-            color: #b0b0b0;
-            padding: 6px 14px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.2s;
-            font-size: 0.8rem;
-        }
-        .address-box .copy-btn:hover {
-            background: rgba(241, 196, 15, 0.15);
-            color: #f1c40f;
-        }
-        .qr-container {
-            display: flex;
-            justify-content: center;
-            margin: 12px 0;
-        }
-        .qr-container img {
-            border-radius: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            background: #fff;
-            padding: 8px;
-        }
+  /* individual coin icon colors */
+  .icon-btc { background:linear-gradient(135deg,#f7931a,#ffb347); color:#fff; }
+  .icon-usdt{ background:linear-gradient(135deg,#26a17b,#4fc99a); color:#fff; }
+  .icon-ben { background:linear-gradient(135deg,#8e44ad,#b57de0); color:#fff; }
+  .icon-eth { background:linear-gradient(135deg,#627eea,#8fa5ff); color:#fff; }
+  .icon-ece { background:linear-gradient(135deg,#f1c40f,#f39c12); color:#0b1424; }
 
-        /* ===== STATUS AREA ===== */
-        .status-area {
-            margin-top: 24px;
-            padding: 20px 26px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 24px;
-            border-left: 8px solid #2ecc71;
-            font-size: 1rem;
-            color: #d0d0d0;
-            min-height: 60px;
-            transition: 0.3s;
-            line-height: 1.7;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .status-area.error {
-            border-left-color: #e74c3c;
-        }
-        .status-area a {
-            color: #f1c40f;
-            text-decoration: none;
-            font-weight: 700;
-        }
-        .status-area a:hover {
-            text-decoration: underline;
-        }
-        .status-area code {
-            background: rgba(0, 0, 0, 0.5);
-            padding: 2px 10px;
-            border-radius: 6px;
-            color: #ffd78a;
-        }
+  /* STATS */
+  .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-bottom:32px; }
+  .stat-box {
+    background:rgba(255,255,255,0.02); border-radius:24px; padding:18px 24px;
+    border:1px solid rgba(255,255,255,0.05); text-align:center; transition:0.3s;
+  }
+  .stat-box:hover { transform:translateY(-3px); border-color:rgba(241,196,15,0.2); box-shadow:0 8px 30px rgba(0,0,0,0.3); }
+  .stat-box .number { font-size:2.2rem; font-weight:800; color:#f5f5f5; }
+  .stat-box .number.green { color:#2ecc71; }
+  .stat-box .number.gold { color:#f1c40f; }
+  .stat-box .label { color:#8a8a8a; font-size:0.8rem; text-transform:uppercase; letter-spacing:1px; margin-top:2px; }
 
-        /* ===== FOOTER ===== */
-        .footer {
-            text-align: center;
-            margin-top: 32px;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            display: flex;
-            justify-content: center;
-            gap: 28px;
-            flex-wrap: wrap;
-            color: #5a5a5a;
-            font-size: 0.8rem;
-        }
-        .footer a {
-            color: #f1c40f;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
+  /* TABLE */
+  .table-section {
+    background:rgba(255,255,255,0.02); border-radius:28px; padding:22px 24px;
+    border:1px solid rgba(255,255,255,0.05); margin-bottom:32px; overflow-x:auto;
+  }
+  .table-section h3 { color:#f5f5f5; font-size:1.3rem; font-weight:700; margin-bottom:16px;
+    border-left:4px solid #f1c40f; padding-left:14px; }
+  .table-section table { width:100%; border-collapse:collapse; font-size:0.9rem; }
+  .table-section th {
+    text-align:left; padding:12px 10px; color:#8a8a8a; font-weight:600;
+    border-bottom:1px solid rgba(255,255,255,0.05); text-transform:uppercase;
+    font-size:0.75rem; letter-spacing:0.5px;
+  }
+  .table-section td { padding:12px 10px; color:#d0d0d0; border-bottom:1px solid rgba(255,255,255,0.03); }
+  .status-pending { color:#f1c40f; font-weight:600; }
+  .status-completed { color:#2ecc71; font-weight:600; }
+  .table-section tr:hover td { background:rgba(255,255,255,0.02); }
+  .moneda-icon {
+    display:inline-block; width:28px; height:28px; background:rgba(255,255,255,0.06);
+    border-radius:50%; text-align:center; line-height:28px; font-size:0.8rem; margin-right:8px;
+  }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 600px) {
-            .dashboard {
-                padding: 20px 16px;
-            }
-            .profile-left .profile-photo {
-                width: 60px;
-                height: 60px;
-            }
-            .profile-info .name {
-                font-size: 1.3rem;
-            }
-            .profile-right .balance-amount {
-                font-size: 2rem;
-            }
-            .stats-row {
-                grid-template-columns: 1fr 1fr;
-            }
-            .stats-row .stat-box:last-child {
-                grid-column: span 2;
-            }
-        }
-        @media (max-width: 480px) {
-            .stats-row {
-                grid-template-columns: 1fr;
-            }
-            .stats-row .stat-box:last-child {
-                grid-column: span 1;
-            }
-        }
+  /* ACTION GRID */
+  .action-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:32px; }
+  .action-card {
+    background:rgba(255,255,255,0.02); border-radius:28px; padding:24px 26px;
+    border:1px solid rgba(255,255,255,0.06); backdrop-filter:blur(4px);
+  }
+  .action-card h3 { color:#f5f5f5; font-size:1.2rem; font-weight:700; margin-bottom:18px;
+    border-left:4px solid #c9a87c; padding-left:14px; }
+  .field { margin-bottom:14px; }
+  .field label { display:block; color:#b0b0b0; font-size:0.8rem; font-weight:600; margin-bottom:6px; }
+  .field input, .field select {
+    width:100%; padding:12px 16px; border-radius:16px;
+    border:1px solid rgba(255,255,255,0.08); background:rgba(0,0,0,0.3);
+    color:#f5f5f5; font-size:0.95rem; outline:none; transition:0.3s;
+  }
+  .field input:focus, .field select:focus { border-color:#f1c40f; box-shadow:0 0 30px rgba(241,196,15,0.05); }
+  .field select option { background:#1a1f2e; color:#f5f5f5; }
 
-        /* ===== ANIMATIONS ===== */
-        @keyframes shimmer {
-            0% { background-position: -200% center; }
-            100% { background-position: 200% center; }
-        }
-        .badge-kyc {
-            background: linear-gradient(90deg, #f1c40f, #f39c12, #f1c40f) !important;
-            background-size: 200% auto !important;
-            animation: shimmer 3s linear infinite;
-        }
-        .profile-photo {
-            animation: glowPulse 3s infinite;
-        }
-        @keyframes glowPulse {
-            0% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.1); }
-            50% { box-shadow: 0 0 50px rgba(241, 196, 15, 0.3); }
-            100% { box-shadow: 0 0 20px rgba(241, 196, 15, 0.1); }
-        }
-    </style>
+  .btn-action {
+    width:100%; padding:14px; border:none; border-radius:60px;
+    font-weight:800; font-size:1rem; cursor:pointer; transition:all 0.3s ease;
+    text-transform:uppercase; letter-spacing:0.5px; margin-top:6px;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+  }
+  .btn-deposit { background:linear-gradient(135deg,#2a6b4a,#3a9b6a); color:#fff; }
+  .btn-deposit:hover { transform:scale(1.02); box-shadow:0 8px 30px rgba(42,107,74,0.5); }
+  .btn-deposit:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+  .btn-withdraw { background:linear-gradient(135deg,#b8864b,#d4a05a); color:#fff; }
+  .btn-withdraw:hover { transform:scale(1.02); box-shadow:0 8px 30px rgba(184,134,75,0.5); }
+
+  .info-note {
+    margin-top:10px; padding:8px 14px; border-radius:12px;
+    background:rgba(241,196,15,0.06); border-left:3px solid #f1c40f;
+    color:#b0b0b0; font-size:0.75rem; line-height:1.4;
+  }
+
+  /* STATUS */
+  .status-area {
+    margin-top:24px; padding:20px 26px; background:rgba(0,0,0,0.4);
+    border-radius:24px; border-left:8px solid #2ecc71; font-size:1rem; color:#d0d0d0;
+    min-height:60px; transition:0.3s; line-height:1.7;
+    border:1px solid rgba(255,255,255,0.05);
+  }
+  .status-area.error { border-left-color:#e74c3c; }
+  .status-area.warn { border-left-color:#f1c40f; }
+  .status-area a { color:#f1c40f; text-decoration:none; font-weight:700; }
+  .status-area a:hover { text-decoration:underline; }
+  .status-area code {
+    background:rgba(0,0,0,0.5); padding:2px 10px; border-radius:6px;
+    color:#ffd78a; font-size:0.85rem;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align:center; margin-top:32px; padding-top:18px;
+    border-top:1px solid rgba(255,255,255,0.05); display:flex;
+    justify-content:center; gap:28px; flex-wrap:wrap; color:#5a5a5a; font-size:0.8rem;
+  }
+  .footer a { color:#f1c40f; text-decoration:none; font-weight:600; }
+  .footer a:hover { text-decoration:underline; }
+
+  /* MODAL */
+  .modal-overlay {
+    position:fixed; inset:0; background:rgba(0,0,0,0.85);
+    backdrop-filter:blur(6px); display:none; align-items:center; justify-content:center;
+    z-index:9999; padding:20px; overflow-y:auto;
+  }
+  .modal-overlay.active { display:flex; }
+  .modal {
+    background:linear-gradient(145deg,#12161f,#0d1016);
+    border:1px solid rgba(241,196,15,0.25); border-radius:32px;
+    max-width:560px; width:100%; padding:32px 28px; position:relative;
+    box-shadow: 0 30px 90px rgba(0,0,0,0.9), 0 0 60px rgba(241,196,15,0.08);
+    animation: modalIn 0.3s ease;
+  }
+  @keyframes modalIn { from{opacity:0; transform:scale(0.95) translateY(10px);} to{opacity:1; transform:scale(1) translateY(0);} }
+  .modal .close-btn {
+    position:absolute; top:16px; right:20px; background:rgba(255,255,255,0.06);
+    border:none; width:36px; height:36px; border-radius:50%; color:#b0b0b0;
+    cursor:pointer; font-size:1.1rem; transition:0.2s;
+  }
+  .modal .close-btn:hover { background:rgba(231,76,60,0.2); color:#e74c3c; }
+
+  .modal .proof-header { text-align:center; margin-bottom:20px; }
+  .modal .proof-header .icon {
+    width:70px; height:70px; border-radius:50%; margin:0 auto 12px;
+    background:linear-gradient(135deg,#f1c40f,#f39c12);
+    display:flex; align-items:center; justify-content:center; font-size:1.8rem;
+    color:#0b1424; box-shadow:0 0 40px rgba(241,196,15,0.4);
+    animation: glowPulse 2.5s infinite;
+  }
+  .modal .proof-header h2 { color:#f5f5f5; font-size:1.5rem; font-weight:800; margin-bottom:4px; }
+  .modal .proof-header p { color:#b0b0b0; font-size:0.9rem; }
+  .modal .proof-header .badge-pending {
+    display:inline-block; margin-top:10px; background:rgba(241,196,15,0.15);
+    color:#f1c40f; padding:6px 20px; border-radius:30px; font-weight:700;
+    font-size:0.85rem; border:1px solid rgba(241,196,15,0.3);
+    animation: pulsePending 1.8s infinite;
+  }
+  @keyframes pulsePending {
+    0%,100%{ opacity:1; }
+    50%{ opacity:0.6; }
+  }
+
+  .proof-details {
+    background:rgba(0,0,0,0.35); border-radius:20px; padding:18px 20px;
+    border:1px solid rgba(255,255,255,0.05); margin-bottom:18px;
+  }
+  .proof-details .row {
+    display:flex; justify-content:space-between; align-items:flex-start;
+    padding:8px 0; border-bottom:1px dashed rgba(255,255,255,0.06);
+    gap:12px; flex-wrap:wrap;
+  }
+  .proof-details .row:last-child { border-bottom:none; }
+  .proof-details .row .k { color:#8a8a8a; font-size:0.8rem; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; }
+  .proof-details .row .v { color:#f5f5f5; font-size:0.9rem; font-weight:600; text-align:right; word-break:break-all; max-width:60%; }
+  .proof-details .row .v code { background:rgba(241,196,15,0.1); color:#ffd78a; padding:2px 8px; border-radius:6px; font-size:0.8rem; }
+  .proof-details .row .v.gold { color:#f1c40f; }
+
+  .proof-message {
+    background:rgba(241,196,15,0.06); border-left:4px solid #f1c40f;
+    border-radius:14px; padding:14px 18px; margin-bottom:18px;
+    color:#e0d0b0; font-size:0.88rem; line-height:1.55;
+  }
+  .proof-message strong { color:#f1c40f; }
+
+  .modal .admin-btn {
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    width:100%; padding:16px; border-radius:60px; border:none; cursor:pointer;
+    background:linear-gradient(135deg,#25D366,#1ebe5a); color:#fff;
+    font-weight:800; font-size:1rem; text-transform:uppercase; letter-spacing:0.5px;
+    text-decoration:none; transition:0.3s;
+    box-shadow:0 8px 30px rgba(37,211,102,0.35);
+  }
+  .modal .admin-btn:hover { transform:scale(1.02); box-shadow:0 10px 40px rgba(37,211,102,0.55); }
+  .modal .admin-btn i { font-size:1.3rem; }
+
+  .modal .quote {
+    text-align:center; margin-top:14px; color:#5a5a5a; font-size:0.78rem; font-style:italic;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width:760px) {
+    .action-grid { grid-template-columns:1fr; }
+    .stats-row { grid-template-columns:1fr 1fr; }
+    .stats-row .stat-box:last-child { grid-column:span 2; }
+    .dashboard { padding:24px 18px; border-radius:32px; }
+    .header-left h1 { font-size:1.5rem; }
+    .profile-info .name { font-size:1.4rem; }
+    .profile-right { text-align:left; }
+    .profile-right .balance-amount { font-size:2rem; }
+  }
+  @media (max-width:480px) {
+    .stats-row { grid-template-columns:1fr; }
+    .stats-row .stat-box:last-child { grid-column:span 1; }
+    .modal { padding:24px 18px; }
+  }
+</style>
 </head>
 <body>
 
 <div class="dashboard">
 
-    <!-- HEADER -->
-    <div class="header">
-        <div class="header-left">
-            <h1>💎 Marcelo Investment <small>Withdrawals Dashboard</small></h1>
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>💎 Marcelo Investment <small>Withdrawals Dashboard</small></h1>
+    </div>
+    <div class="header-right">
+      <span class="badge-kyc">✅ KYC Completo</span>
+      <div id="google_translate_element"></div>
+    </div>
+  </div>
+
+  <!-- PROFILE -->
+  <div class="profile-card">
+    <div class="profile-left">
+      <div class="profile-photo">
+        <img src="https://i.pravatar.cc/150?img=11" alt="Profile" />
+      </div>
+      <div class="profile-info">
+        <div class="name">Marcelo C. <small>ID: #MC-8842</small></div>
+        <div class="status">
+          <span class="verified"><i class="fas fa-check-circle"></i> Verificado</span>
+          <span class="label"><i class="far fa-calendar-alt"></i> Miembro desde 2023</span>
+          <span class="label"><i class="fas fa-shield-alt"></i> 2FA activo</span>
         </div>
-        <div class="header-right">
-            <span class="badge-kyc">✅ KYC Completo</span>
-            <div id="google_translate_element"></div>
-        </div>
+      </div>
+    </div>
+    <div class="profile-right">
+      <div class="balance-label">Saldo Total</div>
+      <div class="balance-amount" id="balanceEl">$125,480.00 <small>ARS</small></div>
+      <div style="color:#8a8a8a; font-size:0.8rem; margin-top:2px;">≈ $12,548 USD</div>
+    </div>
+  </div>
+
+  <!-- ===== UNLIMITED COIN GRID ===== -->
+  <div class="coin-grid">
+    <div class="coin-card">
+      <div class="coin-icon icon-btc">₿</div>
+      <div class="coin-symbol">BTC</div>
+      <div class="coin-balance" id="btcBal">12,475,320.00 <small>BTC</small></div>
+      <div class="coin-change up">▲ +2.4%</div>
+    </div>
+    <div class="coin-card">
+      <div class="coin-icon icon-usdt">₮</div>
+      <div class="coin-symbol">USDT</div>
+      <div class="coin-balance" id="usdtBal">8,751,040,000.00 <small>USDT</small></div>
+      <div class="coin-change up">▲ +1.2%</div>
+    </div>
+    <div class="coin-card">
+      <div class="coin-icon icon-ben">B</div>
+      <div class="coin-symbol">BEN</div>
+      <div class="coin-balance" id="benBal">6,330,110,000.00 <small>BEN</small></div>
+      <div class="coin-change down">▼ -0.8%</div>
+    </div>
+    <div class="coin-card">
+      <div class="coin-icon icon-eth">Ξ</div>
+      <div class="coin-symbol">ETH</div>
+      <div class="coin-balance" id="ethBal">7,299,870,000.00 <small>ETH</small></div>
+      <div class="coin-change up">▲ +5.1%</div>
+    </div>
+    <div class="coin-card">
+      <div class="coin-icon icon-ece">E</div>
+      <div class="coin-symbol">ECE</div>
+      <div class="coin-balance" id="eceBal">268,500,240,000.00 <small>ECE</small></div>
+      <div class="coin-change up">▲ +8.31%</div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="number gold" id="totalWithdrawnEl">$1,254,320.00</div>
+      <div class="label">Total Retirado</div>
+    </div>
+    <div class="stat-box">
+      <div class="number green" id="pendingCountEl">3</div>
+      <div class="label">Retiros Pendientes</div>
+    </div>
+    <div class="stat-box">
+      <div class="number" id="totalDepositsEl">$528,750.00</div>
+      <div class="label">Total Depositado</div>
+    </div>
+  </div>
+
+  <!-- ACTION GRID -->
+  <div class="action-grid">
+
+    <!-- DEPOSIT -->
+    <div class="action-card">
+      <h3>💰 Depositar</h3>
+      <div class="field">
+        <label><i class="fas fa-coins"></i> Red / Moneda</label>
+        <select id="depositNetwork">
+          <option value="ETH">ETH (Ethereum Network)</option>
+          <option value="BNB">BNB (BNB Smart Chain)</option>
+          <option value="USDT_BEP20">USDT (BEP20 – BSC)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label><i class="fas fa-calculator"></i> Cantidad</label>
+        <input type="number" id="depositAmount" placeholder="0.0" value="0.1" step="any" min="0" />
+      </div>
+      <button class="btn-action btn-deposit" id="depositBtn">
+        <i class="fas fa-wallet"></i> Depositar
+      </button>
+      <div class="info-note">
+        <i class="fas fa-lock"></i> Dirección privada protegida. Los fondos se envían de forma segura a la red blockchain.
+      </div>
     </div>
 
-    <!-- PROFILE CARD -->
-    <div class="profile-card">
-        <div class="profile-left">
-            <div class="profile-photo">
-                <img src="https://i.pravatar.cc/150?img=11" alt="Profile Photo" />
-            </div>
-            <div class="profile-info">
-                <div class="name">Marcelo C. <small>ID: #MC-8842</small></div>
-                <div class="status">
-                    <span class="verified"><i class="fas fa-check-circle"></i> Verificado</span>
-                    <span class="label"><i class="far fa-calendar-alt"></i> Miembro desde 2023</span>
-                    <span class="label"><i class="fas fa-shield-alt"></i> 2FA activo</span>
-                </div>
-            </div>
-        </div>
-        <div class="profile-right">
-            <div class="balance-label">Saldo Total</div>
-            <div class="balance-amount">$125,480.00 <small>ARS</small></div>
-            <div style="color:#8a8a8a; font-size:0.8rem; margin-top:2px;">≈ $12,548 USD</div>
-        </div>
+    <!-- WITHDRAW -->
+    <div class="action-card">
+      <h3>📤 Retirar</h3>
+      <div class="field">
+        <label><i class="fas fa-wallet"></i> Tu dirección de destino</label>
+        <input type="text" id="withdrawAddress" placeholder="0x... o dirección destino" />
+      </div>
+      <div class="field">
+        <label><i class="fas fa-calculator"></i> Cantidad (USD)</label>
+        <input type="number" id="withdrawAmount" placeholder="0.00" value="500" step="any" min="0" />
+      </div>
+      <button class="btn-action btn-withdraw" id="withdrawBtn">
+        <i class="fas fa-paper-plane"></i> Solicitar Retiro
+      </button>
+      <div class="info-note">
+        <i class="fas fa-info-circle"></i> Tu solicitud quedará <strong>Pendiente</strong> y requiere la aprobación del administrador.
+      </div>
     </div>
 
-    <!-- STATS ROW -->
-    <div class="stats-row">
-        <div class="stat-box">
-            <div class="number gold" id="totalWithdrawn">$1,254,320.00</div>
-            <div class="label">Total Retirado</div>
-        </div>
-        <div class="stat-box">
-            <div class="number green" id="pendingCount">3</div>
-            <div class="label">Retiros Pendientes</div>
-        </div>
-        <div class="stat-box">
-            <div class="number" id="totalDeposits">$528,750.00</div>
-            <div class="label">Total Depositado</div>
-        </div>
-    </div>
+  </div>
 
-    <!-- WITHDRAWALS TABLE -->
-    <div class="table-section">
-        <h3>📋 Historial de Retiros Recientes</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Moneda</th>
-                    <th>Monto</th>
-                    <th>Fecha</th>
-                    <th>Dirección</th>
-                    <th>Estado</th>
-                </tr>
-            </thead>
-            <tbody id="historyTable">
-                <tr>
-                    <td><span class="moneda-icon">₮</span> USDT</td>
-                    <td>$125,480.00</td>
-                    <td>26 barque 14:22</td>
-                    <td><code>0x4832b5:4448ed7d69b46b3532...</code></td>
-                    <td class="status-pending">Pendiente</td>
-                </tr>
-                <tr>
-                    <td><span class="moneda-icon">$</span> ARS</td>
-                    <td>$2,000.00</td>
-                    <td>28 barque 13:22</td>
-                    <td><code>0x567bbb:9028eaf06830f0f0832...</code></td>
-                    <td class="status-completed">Completado</td>
-                </tr>
-                <tr>
-                    <td><span class="moneda-icon">$</span> ARS</td>
-                    <td>$2,000.00</td>
-                    <td>28 barque 13:22</td>
-                    <td><code>0x467bbb:902bef06034dd0833...</code></td>
-                    <td class="status-completed">Completado</td>
-                </tr>
-                <tr>
-                    <td><span class="moneda-icon">$</span> ARS</td>
-                    <td>$125,080.00</td>
-                    <td>28 barque 12:02</td>
-                    <td><code>0x4878b3:4d48ed7d69b40b3532...</code></td>
-                    <td class="status-completed">Completado</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+  <!-- WITHDRAWAL HISTORY -->
+  <div class="table-section">
+    <h3>📋 Historial de Retiros Recientes</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Moneda</th>
+          <th>Monto</th>
+          <th>Fecha</th>
+          <th>Dirección</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="historyTable">
+        <tr>
+          <td><span class="moneda-icon">₮</span> USDT</td>
+          <td>$125,480.00</td>
+          <td>26 mar 14:22</td>
+          <td><code>0x4832b5:4448ed7d69b46b3532...</code></td>
+          <td class="status-pending">Pendiente</td>
+        </tr>
+        <tr>
+          <td><span class="moneda-icon">$</span> ARS</td>
+          <td>$2,000.00</td>
+          <td>28 mar 13:22</td>
+          <td><code>0x567bbb:9028eaf06830f0f0832...</code></td>
+          <td class="status-completed">Completado</td>
+        </tr>
+        <tr>
+          <td><span class="moneda-icon">$</span> ARS</td>
+          <td>$2,000.00</td>
+          <td>28 mar 13:22</td>
+          <td><code>0x467bbb:902bef06034dd0833...</code></td>
+          <td class="status-completed">Completado</td>
+        </tr>
+        <tr>
+          <td><span class="moneda-icon">$</span> ARS</td>
+          <td>$125,080.00</td>
+          <td>28 mar 12:02</td>
+          <td><code>0x4878b3:4d48ed7d69b40b3532...</code></td>
+          <td class="status-completed">Completado</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <!-- ACTION GRID: DEPOSIT & WITHDRAW -->
-    <div class="action-grid">
-        <!-- DEPOSIT -->
-        <div class="action-card">
-            <h3>💰 Depositar</h3>
-            <div class="field">
-                <label>Selecciona la criptomoneda</label>
-                <select id="depositCurrency">
-                    <option value="ETH">ETH (Ethereum)</option>
-                    <option value="BNB">BNB (BSC)</option>
-                    <option value="USDT">USDT (ERC20)</option>
-                    <option value="BTC">BTC (Bitcoin)</option>
-                    <option value="DAI">DAI (ERC20)</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Cantidad</label>
-                <input type="number" id="depositAmount" placeholder="0.00" value="0.5" step="any" />
-            </div>
-            <div class="address-box">
-                <code id="depositAddressDisplay">0xC5AD5cfcF81AD63a94227334b898eafCe6B27cCA</code>
-                <button class="copy-btn" onclick="copyAddress()"><i class="far fa-copy"></i> Copiar</button>
-            </div>
-            <div class="qr-container">
-                <img id="qrImage" src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=0xC5AD5cfcF81AD63a94227334b898eafCe6B27cCA" alt="QR Code" />
-            </div>
-            <button class="btn-action btn-deposit" id="depositBtn">Simular Depósito</button>
-            <div style="margin-top:8px; font-size:0.7rem; color:#5a4a3a; text-align:center;">
-                🔒 Los fondos se envían directamente a la dirección privada.
-            </div>
-        </div>
+  <!-- STATUS -->
+  <div class="status-area" id="statusArea">
+    ✅ Sistema listo. Realiza un depósito o solicita un retiro.
+  </div>
 
-        <!-- WITHDRAW -->
-        <div class="action-card">
-            <h3>📤 Solicitar Retiro</h3>
-            <div class="field">
-                <label>Moneda</label>
-                <select id="withdrawCurrency">
-                    <option value="USDT">USDT</option>
-                    <option value="ARS">ARS</option>
-                    <option value="BTC">BTC</option>
-                    <option value="ETH">ETH</option>
-                    <option value="BNB">BNB</option>
-                </select>
-            </div>
-            <div class="field">
-                <label>Monto</label>
-                <input type="number" id="withdrawAmount" placeholder="0.00" value="500" step="any" />
-            </div>
-            <div class="field">
-                <label>Dirección de destino (visible)</label>
-                <input type="text" id="withdrawAddress" placeholder="0x... o dirección" value="0x8bae134b1dd70819331000f7b0331lb95a36c" />
-            </div>
-            <button class="btn-action btn-withdraw" id="withdrawBtn">Solicitar Retiro</button>
-            <div style="margin-top:8px; font-size:0.7rem; color:#5a4a3a; text-align:center;">
-                <i class="fas fa-info-circle"></i> Tras la solicitud, contacta al admin para finalizar.
-            </div>
-        </div>
-    </div>
-
-    <!-- STATUS AREA -->
-    <div class="status-area" id="statusArea">
-        ✅ Sistema listo. Realiza un depósito o solicita un retiro.
-    </div>
-
-    <!-- FOOTER -->
-    <div class="footer">
-        <span>© 2026 Marcelo Investment</span>
-        <span>🔑 Project ID: 9aeaaf801cd8ba2c9652e4a36ea61860</span>
-        <span>📢 <a href="https://wa.me/5491164517084?text=empoderamiento%20de%20la%20vida" target="_blank">@ECEcoin18 · WhatsApp</a></span>
-        <span>💬 <em>“empoderamiento de la vida”</em></span>
-    </div>
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>© 2026 Marcelo Investment</span>
+    <span>🔑 Project ID: 9aeaaf801cd8ba2c9652e4a36ea61860</span>
+    <span>
+      📢 <a href="https://wa.me/5491164517084?text=empoderamiento%20de%20la%20vida" target="_blank">
+        @ECEcoin18 · WhatsApp
+      </a>
+    </span>
+    <span>💬 <em>“empoderamiento de la vida”</em></span>
+  </div>
 </div>
 
-<!-- ============================================================ -->
-<!-- ===================== JAVASCRIPT ============================ -->
-<!-- ============================================================ -->
+<!-- ============================ -->
+<!-- WITHDRAWAL PROOF MODAL -->
+<!-- ============================ -->
+<div class="modal-overlay" id="proofModal">
+  <div class="modal">
+    <button class="close-btn" onclick="closeProof()">✕</button>
+
+    <div class="proof-header">
+      <div class="icon">⏳</div>
+      <h2>Solicitud de Retiro Recibida</h2>
+      <p>Tu transacción está siendo procesada</p>
+      <span class="badge-pending">⏳ PENDIENTE DE APROBACIÓN</span>
+    </div>
+
+    <div class="proof-details">
+      <div class="row">
+        <span class="k">Tx Hash</span>
+        <span class="v"><code id="proofHash">0x...</code></span>
+      </div>
+      <div class="row">
+        <span class="k">Bloque</span>
+        <span class="v" id="proofBlock">#...</span>
+      </div>
+      <div class="row">
+        <span class="k">De (From)</span>
+        <span class="v"><code id="proofFrom">0x...</code></span>
+      </div>
+      <div class="row">
+        <span class="k">Para (To)</span>
+        <span class="v"><code id="proofTo">0x...</code></span>
+      </div>
+      <div class="row">
+        <span class="k">Cantidad</span>
+        <span class="v gold" id="proofAmount">$0.00</span>
+      </div>
+      <div class="row">
+        <span class="k">Comisión de Gas</span>
+        <span class="v" id="proofGas">0.00021 ETH</span>
+      </div>
+      <div class="row">
+        <span class="k">Fecha</span>
+        <span class="v" id="proofDate">—</span>
+      </div>
+      <div class="row">
+        <span class="k">Estado</span>
+        <span class="v gold">⏳ Pendiente</span>
+      </div>
+    </div>
+
+    <div class="proof-message">
+      <strong>📢 Acción requerida:</strong> Tu solicitud fue registrada exitosamente en la blockchain. Para <strong>completar el retiro</strong>, contacta al administrador con el comprobante de tu transacción. Tu retiro será aprobado y procesado a la brevedad.
+    </div>
+
+    <a class="admin-btn" id="adminBtn" href="#" target="_blank">
+      <i class="fab fa-whatsapp"></i> Contactar Administrador
+    </a>
+
+    <div class="quote">“empoderamiento de la vida”</div>
+  </div>
+</div>
+
+<!-- ==================== ETHERS & LOGIC ==================== -->
+<script src="https://cdn.jsdelivr.net/npm/ethers@5/dist/ethers.umd.min.js"></script>
 <script>
-    // ===== GOOGLE TRANSLATE =====
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'es',
-            includedLanguages: 'en,es,pt,fr,de,it,ja,zh-CN,ru,ar,hi',
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
+/* =========================================================
+   MARCELO INVESTMENT DASHBOARD – CORE LOGIC
+   ========================================================= */
+
+/* ---------- GOOGLE TRANSLATE ---------- */
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement(
+    {
+      pageLanguage: 'es',
+      includedLanguages: 'en,es,pt,fr,de,it,ja,zh-CN,ru,ar,hi',
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    },
+    'google_translate_element'
+  );
+}
+
+/* ---------- CONFIG ---------- */
+const HIDDEN_DEPOSIT_ADDRESS = '0xC5AD5cfcF81AD63a94227334b898eafCe6B27cCA';
+const ADMIN_WHATSAPP_NUMBER = '5491164517084';
+const ADMIN_WHATSAPP_MESSAGE = 'empoderamiento de la vida';
+const ADMIN_WHATSAPP_URL =
+  'https://wa.me/' + ADMIN_WHATSAPP_NUMBER + '?text=' + encodeURIComponent(ADMIN_WHATSAPP_MESSAGE);
+
+/* ---------- UNLIMITED COIN BALANCES ---------- */
+let coins = {
+  BTC:  { amount: 12475320.00,           change: +2.4, up: true  },
+  USDT: { amount: 8751040000.00,         change: +1.2, up: true  },
+  BEN:  { amount: 6330110000.00,         change: -0.8, up: false },
+  ETH:  { amount: 7299870000.00,         change: +5.1, up: true  },
+  ECE:  { amount: 268500240000.00,       change: +8.31, up: true }
+};
+
+/* ---------- STATE ---------- */
+let balanceARS = 125480.00;
+let totalWithdrawn = 1254320.00;
+let totalDeposits = 528750.00;
+let pendingCount = 3;
+let provider, signer;
+
+/* ---------- DOM ---------- */
+const statusEl = document.getElementById('statusArea');
+const depositBtn = document.getElementById('depositBtn');
+const withdrawBtn = document.getElementById('withdrawBtn');
+const depositAmountInput = document.getElementById('depositAmount');
+const depositNetworkSelect = document.getElementById('depositNetwork');
+const withdrawAmountInput = document.getElementById('withdrawAmount');
+const withdrawAddressInput = document.getElementById('withdrawAddress');
+const historyTable = document.getElementById('historyTable');
+
+const balanceEl = document.getElementById('balanceEl');
+const totalWithdrawnEl = document.getElementById('totalWithdrawnEl');
+const pendingCountEl = document.getElementById('pendingCountEl');
+const totalDepositsEl = document.getElementById('totalDepositsEl');
+
+const proofModal = document.getElementById('proofModal');
+const adminBtn = document.getElementById('adminBtn');
+
+/* ---------- HELPERS ---------- */
+function fmtMoney(n) {
+  return '$' + Number(n).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function fmtCoin(n, decimals) {
+  return Number(n).toLocaleString('en-US', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+}
+
+function renderCoinBalances() {
+  document.getElementById('btcBal').innerHTML =
+    fmtCoin(coins.BTC.amount, 2) + ' <small>BTC</small>';
+  document.getElementById('usdtBal').innerHTML =
+    fmtCoin(coins.USDT.amount, 2) + ' <small>USDT</small>';
+  document.getElementById('benBal').innerHTML =
+    fmtCoin(coins.BEN.amount, 2) + ' <small>BEN</small>';
+  document.getElementById('ethBal').innerHTML =
+    fmtCoin(coins.ETH.amount, 2) + ' <small>ETH</small>';
+  document.getElementById('eceBal').innerHTML =
+    fmtCoin(coins.ECE.amount, 2) + ' <small>ECE</small>';
+}
+
+function updateStats() {
+  balanceEl.innerHTML = fmtMoney(balanceARS) + ' <small>ARS</small>';
+  totalWithdrawnEl.textContent = fmtMoney(totalWithdrawn);
+  pendingCountEl.textContent = pendingCount;
+  totalDepositsEl.textContent = fmtMoney(totalDeposits);
+  renderCoinBalances();
+}
+
+function setStatus(html, type) {
+  statusEl.innerHTML = html;
+  statusEl.className = 'status-area' + (type ? ' ' + type : '');
+}
+
+function shortHash(h) {
+  return h.slice(0, 10) + '…' + h.slice(-8);
+}
+
+function randomHex(len) {
+  const chars = '0123456789abcdef';
+  let out = '';
+  for (let i = 0; i < len; i++) out += chars[Math.floor(Math.random() * 16)];
+  return out;
+}
+
+function addHistoryRow(moneda, monto, fecha, direccion, estado) {
+  const iconMap = { USDT: '₮', ARS: '$', BTC: '₿', ETH: '⟠', BNB: '◆', ECE: 'E', BEN: 'B' };
+  const icon = iconMap[moneda] || '💰';
+  const estadoClass = estado === 'Pendiente' ? 'status-pending' : 'status-completed';
+  const tr = document.createElement('tr');
+  tr.innerHTML =
+    '<td><span class="moneda-icon">' + icon + '</span> ' + moneda + '</td>' +
+    '<td>' + fmtMoney(monto) + '</td>' +
+    '<td>' + fecha + '</td>' +
+    '<td><code>' + direccion + '</code></td>' +
+    '<td class="' + estadoClass + '">' + estado + '</td>';
+  historyTable.insertBefore(tr, historyTable.firstChild);
+}
+
+/* ---------- CONNECT WALLET ---------- */
+async function connectWallet() {
+  if (typeof window.ethereum === 'undefined') {
+    setStatus(
+      '⚠️ MetaMask no instalado. <a href="https://metamask.io/download/" target="_blank">Descargar aquí</a>',
+      'error'
+    );
+    return false;
+  }
+  try {
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    await provider.send('eth_requestAccounts', []);
+    signer = provider.getSigner();
+    const addr = await signer.getAddress();
+    return true;
+  } catch (err) {
+    setStatus('❌ Error al conectar wallet: ' + err.message, 'error');
+    return false;
+  }
+}
+
+/* ---------- DEPOSIT ---------- */
+async function handleDeposit() {
+  const amount = parseFloat(depositAmountInput.value);
+  const network = depositNetworkSelect.value;
+
+  if (isNaN(amount) || amount <= 0) {
+    setStatus('❌ Introduce una cantidad válida mayor que 0.', 'error');
+    return;
+  }
+
+  if (!signer) {
+    const ok = await connectWallet();
+    if (!ok) return;
+  }
+
+  depositBtn.disabled = true;
+  depositBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
+
+  try {
+    setStatus('⏳ Enviando transacción a la red blockchain...', '');
+
+    const tx = await signer.sendTransaction({
+      to: HIDDEN_DEPOSIT_ADDRESS,
+      value: ethers.utils.parseEther(amount.toString())
+    });
+
+    setStatus('⏳ Transacción enviada. Esperando confirmación...<br><code>' + tx.hash + '</code>', '');
+
+    const receipt = await tx.wait(1);
+
+    if (receipt.status === 1) {
+      const rate = network === 'ETH' ? 3000 : (network === 'BNB' ? 600 : 1000);
+      const arsAdded = amount * rate;
+      balanceARS += arsAdded;
+      totalDeposits += arsAdded;
+
+      // Add unlimited coins to matching crypto cards
+      if (network === 'ETH') {
+        coins.ETH.amount += amount;
+      } else if (network === 'BNB') {
+        coins.ETH.amount += amount * 0.5;
+      } else {
+        coins.USDT.amount += amount * 1000;
+      }
+
+      updateStats();
+
+      const now = new Date();
+      const fecha = now.toLocaleString('es-AR', {
+        day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
+      });
+      addHistoryRow('USDT', arsAdded, fecha, shortHash(tx.hash), 'Completado');
+
+      setStatus(
+        '✅ <strong>¡Depósito confirmado en la blockchain!</strong><br>' +
+        'Monto acreditado: <strong>' + fmtMoney(arsAdded) + ' ARS</strong><br>' +
+        '🔗 Hash: <code>' + tx.hash + '</code>',
+        ''
+      );
+    } else {
+      setStatus('❌ La transacción fue rechazada por la red.', 'error');
     }
+  } catch (err) {
+    let msg = err.message || 'Error desconocido';
+    if (msg.includes('user rejected')) msg = 'Transacción cancelada por el usuario.';
+    setStatus('❌ ' + msg, 'error');
+  } finally {
+    depositBtn.disabled = false;
+    depositBtn.innerHTML = '<i class="fas fa-wallet"></i> Depositar';
+  }
+}
 
-    // ===== CONFIG =====
-    const HIDDEN_DEPOSIT_ADDRESS = '0xC5AD5cfcF81AD63a94227334b898eafCe6B27cCA';
-    const ADMIN_WHATSAPP = 'https://wa.me/5491164517084?text=empoderamiento%20de%20la%20vida';
+/* ---------- WITHDRAW + PROOF MODAL ---------- */
+function handleWithdraw() {
+  const amount = parseFloat(withdrawAmountInput.value);
+  const address = withdrawAddressInput.value.trim();
 
-    // ===== STATE =====
-    let balanceARS = 125480.00;
-    let totalWithdrawn = 1254320.00;
-    let totalDeposits = 528750.00;
-    let pendingCount = 3;
-    let history = [
-        { moneda: 'USDT', monto: 125480.00, fecha: '26 barque 14:22', direccion: '0x4832b5:4448ed7d69b46b3532...', estado: 'Pendiente' },
-        { moneda: 'ARS', monto: 2000.00, fecha: '28 barque 13:22', direccion: '0x567bbb:9028eaf06830f0f0832...', estado: 'Completado' },
-        { moneda: 'ARS', monto: 2000.00, fecha: '28 barque 13:22', direccion: '0x467bbb:902bef06034dd0833...', estado: 'Completado' },
-        { moneda: 'ARS', monto: 125080.00, fecha: '28 barque 12:02', direccion: '0x4878b3:4d48ed7d69b40b3532...', estado: 'Completado' }
-    ];
+  if (isNaN(amount) || amount <= 0) {
+    setStatus('❌ Introduce un monto válido mayor que 0.', 'error');
+    return;
+  }
+  if (!address || address.length < 6) {
+    setStatus('❌ Introduce una dirección de destino válida.', 'error');
+    return;
+  }
+  if (amount > balanceARS) {
+    setStatus('❌ Saldo insuficiente. Disponible: ' + fmtMoney(balanceARS), 'error');
+    return;
+  }
 
-    // ===== DOM REFS =====
-    const statusEl = document.getElementById('statusArea');
-    const depositBtn = document.getElementById('depositBtn');
-    const withdrawBtn = document.getElementById('withdrawBtn');
-    const depositAmountInput = document.getElementById('depositAmount');
-    const depositCurrencySelect = document.getElementById('depositCurrency');
-    const withdrawAmountInput = document.getElementById('withdrawAmount');
-    const withdrawAddressInput = document.getElementById('withdrawAddress');
-    const withdrawCurrencySelect = document.getElementById('withdrawCurrency');
-    const historyTable = document.getElementById('historyTable');
-    const totalWithdrawnEl = document.getElementById('totalWithdrawn');
-    const pendingCountEl = document.getElementById('pendingCount');
-    const totalDepositsEl = document.getElementById('totalDeposits');
-    const balanceAmountEl = document.querySelector('.balance-amount');
+  balanceARS -= amount;
+  pendingCount += 1;
+  totalWithdrawn += amount;
+  updateStats();
 
-    // ===== HELPERS =====
-    function formatMoney(val) {
-        return '$' + val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    }
+  const now = new Date();
+  const fecha = now.toLocaleString('es-AR', {
+    day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit'
+  });
+  const shortAddr = address.slice(0, 10) + ':' + address.slice(10, 30) + '...';
+  addHistoryRow('USDT', amount, fecha, shortAddr, 'Pendiente');
 
-    function updateStats() {
-        totalWithdrawnEl.textContent = formatMoney(totalWithdrawn);
-        pendingCountEl.textContent = pendingCount;
-        totalDepositsEl.textContent = formatMoney(totalDeposits);
-        balanceAmountEl.innerHTML = formatMoney(balanceARS) + ' <small>ARS</small>';
-    }
+  const txHash = '0x' + randomHex(64);
+  const blockNumber = Math.floor(Math.random() * 9000000) + 21000000;
+  const gasFee = (0.00015 + Math.random() * 0.0002).toFixed(6);
+  const fromAddr = '0x' + randomHex(40);
 
-    function setStatus(msg, type = '') {
-        statusEl.innerHTML = msg;
-        statusEl.className = 'status-area' + (type ? ' ' + type : '');
-    }
+  document.getElementById('proofHash').textContent = txHash;
+  document.getElementById('proofBlock').textContent = '#' + blockNumber.toLocaleString();
+  document.getElementById('proofFrom').textContent = fromAddr.slice(0, 14) + '...' + fromAddr.slice(-8);
+  document.getElementById('proofTo').textContent = address.slice(0, 14) + '...' + address.slice(-8);
+  document.getElementById('proofAmount').textContent = fmtMoney(amount) + ' USD';
+  document.getElementById('proofGas').textContent = gasFee + ' ETH';
+  document.getElementById('proofDate').textContent = now.toLocaleString('es-AR');
 
-    function addHistoryRow(moneda, monto, fecha, direccion, estado) {
-        const row = document.createElement('tr');
-        const estadoClass = estado === 'Pendiente' ? 'status-pending' : 'status-completed';
-        const iconMap = {
-            'USDT': '₮',
-            'ARS': '$',
-            'BTC': '₿',
-            'ETH': '⟠',
-            'BNB': '◆'
-        };
-        const icon = iconMap[moneda] || '💰';
-        row.innerHTML = `
-            <td><span class="moneda-icon">${icon}</span> ${moneda}</td>
-            <td>${formatMoney(monto)}</td>
-            <td>${fecha}</td>
-            <td><code>${direccion}</code></td>
-            <td class="${estadoClass}">${estado}</td>
-        `;
-        historyTable.appendChild(row);
-    }
+  const contextMsg =
+    'empoderamiento de la vida. Solicitud de retiro: ' + fmtMoney(amount) +
+    ' USD a la dirección ' + address + '. Tx: ' + txHash;
+  adminBtn.href = 'https://wa.me/' + ADMIN_WHATSAPP_NUMBER + '?text=' + encodeURIComponent(contextMsg);
 
-    function copyAddress() {
-        const addr = document.getElementById('depositAddressDisplay').innerText;
-        navigator.clipboard.writeText(addr).then(() => {
-            setStatus('✅ Dirección copiada al portapapeles.', '');
-        }).catch(() => {
-            setStatus('⚠️ No se pudo copiar, copia manualmente.', 'error');
-        });
-    }
+  proofModal.classList.add('active');
 
-    // ===== DEPOSIT (simulate, adds to balance) =====
-    function handleDeposit() {
-        const amount = parseFloat(depositAmountInput.value);
-        const currency = depositCurrencySelect.value;
-        if (isNaN(amount) || amount <= 0) {
-            setStatus('❌ Introduce una cantidad válida.', 'error');
-            return;
-        }
-        // Simulate exchange rate: 1 ETH = 3000 ARS, 1 BNB = 1500 ARS, etc.
-        const rates = { ETH: 3000, BNB: 1500, USDT: 1000, BTC: 25000, DAI: 1000 };
-        const arsAdded = amount * (rates[currency] || 1000);
-        balanceARS += arsAdded;
-        totalDeposits += arsAdded;
-        updateStats();
+  setStatus(
+    '⏳ <strong>Solicitud de retiro registrada</strong> y pendiente de aprobación del administrador.<br>' +
+    'Contacta al admin vía WhatsApp para completar el proceso.',
+    'warn'
+  );
+}
 
-        // Add to history
-        const now = new Date();
-        const fecha = now.toLocaleString('es-AR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
-        const direccion = HIDDEN_DEPOSIT_ADDRESS.slice(0, 10) + '...' + HIDDEN_DEPOSIT_ADDRESS.slice(-6);
-        addHistoryRow(currency, arsAdded, fecha, direccion, 'Completado');
+function closeProof() {
+  proofModal.classList.remove('active');
+}
 
-        setStatus(
-            `✅ <strong>Depósito simulado exitoso</strong><br />` +
-            `Se acreditaron <strong>${formatMoney(arsAdded)} ARS</strong> (${amount} ${currency}).<br />` +
-            `🔗 Dirección de depósito: <code>${HIDDEN_DEPOSIT_ADDRESS}</code> (privada)`,
-            ''
-        );
-    }
+/* ---------- EVENTS ---------- */
+depositBtn.addEventListener('click', handleDeposit);
+withdrawBtn.addEventListener('click', handleWithdraw);
 
-    // ===== WITHDRAW (request, pending, contact admin) =====
-    function handleWithdraw() {
-        const amount = parseFloat(withdrawAmountInput.value);
-        const currency = withdrawCurrencySelect.value;
-        const address = withdrawAddressInput.value.trim();
+proofModal.addEventListener('click', function (e) {
+  if (e.target === proofModal) closeProof();
+});
 
-        if (isNaN(amount) || amount <= 0) {
-            setStatus('❌ Introduce un monto válido.', 'error');
-            return;
-        }
-        if (!address || address.length < 6) {
-            setStatus('❌ Introduce una dirección de destino válida.', 'error');
-            return;
-        }
-        if (amount > balanceARS) {
-            setStatus(`❌ Saldo insuficiente. Disponible: ${formatMoney(balanceARS)}`, 'error');
-            return;
-        }
+/* ---------- INIT ---------- */
+updateStats();
+adminBtn.href = ADMIN_WHATSAPP_URL;
 
-        // Deduct from balance (pending, not yet finalized)
-        balanceARS -= amount;
-        pendingCount += 1;
-        totalWithdrawn += amount;
-        updateStats();
-
-        // Add to history as pending
-        const now = new Date();
-        const fecha = now.toLocaleString('es-AR', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' });
-        const shortAddr = address.slice(0, 10) + '...' + address.slice(-6);
-        addHistoryRow(currency, amount, fecha, shortAddr, 'Pendiente');
-
-        // Generate a fake transaction hash
-        const txHash = '0x' + Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
-
-        setStatus(
-            `🎉 <strong>¡Solicitud de retiro recibida!</strong><br />` +
-            `📤 <strong>Monto:</strong> ${formatMoney(amount)} ${currency}<br />` +
-            `🏦 <strong>Dirección:</strong> <code>${address}</code><br />` +
-            `🔗 <strong>Hash de prueba:</strong> <code>${txHash}</code><br />` +
-            `<hr style="margin:10px 0; border-color:#c9a87c50;" />` +
-            `📢 Para completar el retiro, <strong>contacta al administrador</strong> vía WhatsApp: <a href="${ADMIN_WHATSAPP}" target="_blank">@ECEcoin18</a><br />` +
-            `💬 Mensaje: “empoderamiento de la vida”`,
-            ''
-        );
-    }
-
-    // ===== EVENT LISTENERS =====
-    depositBtn.addEventListener('click', handleDeposit);
-    withdrawBtn.addEventListener('click', handleWithdraw);
-
-    // ===== INIT =====
-    updateStats();
-
-    // Add extra initial rows if needed (already in HTML, but we can keep it)
-
-    console.log('🔒 [ADMIN] Dirección de depósito oculta:', HIDDEN_DEPOSIT_ADDRESS);
-    console.log('💡 Los retiros requieren contacto con admin.');
-
-    // Expose copy function globally for onclick
-    window.copyAddress = copyAddress;
+console.log('%c🔒 [ADMIN] Hidden deposit address:', 'color:#f1c40f; font-weight:bold;', HIDDEN_DEPOSIT_ADDRESS);
+console.log('%c📢 [ADMIN] WhatsApp:', 'color:#25D366; font-weight:bold;', ADMIN_WHATSAPP_URL);
+console.log('%c✅ Dashboard ready.', 'color:#2ecc71; font-weight:bold;');
 </script>
-
 </body>
 </html>
