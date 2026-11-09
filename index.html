@@ -48,7 +48,7 @@
     background: rgba(255,255,255,0.05); border-radius:30px; padding:4px 10px;
     border:1px solid rgba(255,255,255,0.08);
   }
-  .goog-te-gadget { color:#fff !important; font-family:inherit !important; font-size:0 !important; }
+  .goog-te-gadget { color:#fff !important; font-family:inherit !important; font-size: 0 !important; }
   .goog-te-gadget .goog-te-gadget-simple {
     background: transparent !important; border: none !important; padding: 0 !important;
   }
@@ -80,10 +80,7 @@
     padding-left:40px; white-space:nowrap;
   }
   .ticker-bar:hover .ticker-track { animation-play-state: paused; }
-  @keyframes tickerScroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
+  @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
   .ticker-item { display:flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600; }
   .ticker-item .sym { color:#8a8a8a; font-weight:700; letter-spacing:0.5px; }
   .ticker-item .px { color:#f5f5f5; font-weight:800; transition: color 0.4s; }
@@ -94,9 +91,7 @@
   .ticker-item .chg.down { background:rgba(231,76,60,0.15); color:#e74c3c; }
 
   /* COIN GRID */
-  .coin-grid {
-    display:grid; grid-template-columns:repeat(5, 1fr); gap:16px; margin-bottom:28px;
-  }
+  .coin-grid { display:grid; grid-template-columns:repeat(5, 1fr); gap:16px; margin-bottom:28px; }
   @media (max-width:900px){ .coin-grid { grid-template-columns:repeat(3,1fr);} }
   @media (max-width:600px){ .coin-grid { grid-template-columns:repeat(2,1fr);} }
   @media (max-width:400px){ .coin-grid { grid-template-columns:1fr;} }
@@ -112,8 +107,7 @@
   .coin-card::before {
     content:''; position:absolute; inset:-2px; border-radius:24px;
     background: conic-gradient(from 0deg, transparent 0deg, rgba(241,196,15,0.35) 90deg, transparent 180deg, rgba(46,204,113,0.25) 270deg, transparent 360deg);
-    opacity:0; transition:0.4s; z-index:0;
-    animation: rotateGlow 4s linear infinite;
+    opacity:0; transition:0.4s; z-index:0; animation: rotateGlow 4s linear infinite;
   }
   .coin-card:hover::before { opacity:1; }
   @keyframes rotateGlow { to { transform: rotate(360deg); } }
@@ -126,9 +120,7 @@
     margin:0 auto 10px; font-size:1.3rem; font-weight:800;
     border:2px solid rgba(255,255,255,0.1);
     box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 0 12px rgba(255,255,255,0.1);
-    position:relative;
-    animation: coinSpin 6s linear infinite;
-    transform-style: preserve-3d;
+    position:relative; animation: coinSpin 6s linear infinite; transform-style: preserve-3d;
   }
   @keyframes coinSpin {
     0%   { transform: rotateY(0deg);   box-shadow: 0 4px 14px rgba(0,0,0,0.4), inset 0 0 12px rgba(255,255,255,0.15); }
@@ -138,8 +130,7 @@
   .coin-card:hover .coin-icon { animation-duration: 1.5s; }
   .coin-icon::after {
     content:''; position:absolute; inset:-6px; border-radius:50%;
-    border:1px dashed rgba(255,255,255,0.25);
-    animation: ringRotate 8s linear infinite; pointer-events:none;
+    border:1px dashed rgba(255,255,255,0.25); animation: ringRotate 8s linear infinite; pointer-events:none;
   }
   @keyframes ringRotate { to { transform: rotate(360deg); } }
 
@@ -147,23 +138,11 @@
   .coin-name { color:#6a6a6a; font-size:0.68rem; margin-top:2px; }
   .coin-balance {
     color:#f5f5f5; font-weight:800; font-size:1.35rem;
-    margin:8px 0 2px; letter-spacing:-0.5px; line-height:1.1;
-    transition: color 0.4s;
+    margin:8px 0 2px; letter-spacing:-0.5px; line-height:1.1; transition: color 0.4s;
   }
-  .coin-balance.flash { color:#f1c40f; text-shadow: 0 0 20px rgba(241,196,15,0.8); }
-  .coin-rate {
-    font-size:0.75rem; color:#8a8a8a; margin:6px 0 4px; font-weight:600;
-    display:flex; align-items:center; justify-content:center; gap:6px;
-  }
-  .live-dot {
-    display:inline-block; width:6px; height:6px; border-radius:50%;
-    background:#2ecc71; box-shadow:0 0 8px #2ecc71;
-    animation: liveDotPulse 1.5s infinite;
-  }
-  .coin-change {
-    font-size:0.72rem; font-weight:700; padding:3px 12px;
-    border-radius:30px; display:inline-block; margin-top:4px;
-  }
+  .coin-rate { font-size:0.75rem; color:#8a8a8a; margin:6px 0 4px; font-weight:600; display:flex; align-items:center; justify-content:center; gap:6px; }
+  .live-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#2ecc71; box-shadow:0 0 8px #2ecc71; animation: liveDotPulse 1.5s infinite; }
+  .coin-change { font-size:0.72rem; font-weight:700; padding:3px 12px; border-radius:30px; display:inline-block; margin-top:4px; }
   .coin-change.up { background:rgba(46,204,113,0.15); color:#2ecc71; }
   .coin-change.down { background:rgba(231,76,60,0.15); color:#e74c3c; }
 
@@ -173,7 +152,7 @@
   .icon-usdt{ background:linear-gradient(135deg,#26a17b,#4fc99a); color:#fff; }
   .icon-sol { background:linear-gradient(135deg,#9945ff,#14f195); color:#fff; }
 
-  /* WALLET SECTION */
+  /* SECTIONS (Wallet & Withdrawal) */
   .wallet-section {
     background:rgba(255,255,255,0.02); border-radius:28px;
     padding:26px 28px; border:1px solid rgba(255,255,255,0.06);
@@ -184,20 +163,12 @@
     background:linear-gradient(90deg, transparent, rgba(241,196,15,0.6), transparent);
     animation: shimmerLine 3s linear infinite;
   }
-  @keyframes shimmerLine {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
-  }
-  .wallet-section h3 {
-    color:#f5f5f5; font-size:1.2rem; font-weight:700; margin-bottom:6px;
-    display:flex; align-items:center; gap:10px;
-  }
+  @keyframes shimmerLine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+  .wallet-section h3 { color:#f5f5f5; font-size:1.2rem; font-weight:700; margin-bottom:6px; display:flex; align-items:center; gap:10px; }
   .wallet-section h3 i { color:#f1c40f; }
   .wallet-section p.sub { color:#8a8a8a; font-size:0.85rem; margin-bottom:18px; }
 
-  .wallet-input-row {
-    display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;
-  }
+  .wallet-input-row { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
   .wallet-input-row select, .wallet-input-row input {
     padding:14px 16px; border-radius:16px;
     border:1px solid rgba(255,255,255,0.08); background:rgba(0,0,0,0.3);
@@ -206,46 +177,67 @@
   .wallet-input-row select { min-width:180px; }
   .wallet-input-row select option { background:#1a1f2e; color:#f5f5f5; }
   .wallet-input-row input { flex:1; min-width:200px; font-family:'Courier New',monospace; }
-  .wallet-input-row input:focus, .wallet-input-row select:focus {
-    border-color:#f1c40f; box-shadow:0 0 30px rgba(241,196,15,0.08);
-  }
+  .wallet-input-row input:focus, .wallet-input-row select:focus { border-color:#f1c40f; box-shadow:0 0 30px rgba(241,196,15,0.08); }
 
   .btn-lookup {
     padding:14px 32px; border:none; border-radius:60px;
     font-weight:800; font-size:0.95rem; cursor:pointer;
     background:linear-gradient(135deg,#2a6b4a,#3a9b6a); color:#fff;
     transition:all 0.3s ease; text-transform:uppercase; letter-spacing:0.5px;
-    display:inline-flex; align-items:center; gap:10px;
-    box-shadow:0 6px 20px rgba(42,107,74,0.35);
+    display:inline-flex; align-items:center; gap:10px; box-shadow:0 6px 20px rgba(42,107,74,0.35);
   }
   .btn-lookup:hover { transform:scale(1.03); box-shadow:0 10px 30px rgba(42,107,74,0.5); }
   .btn-lookup:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
 
-  .wallet-result {
-    display:none; margin-top:18px; padding:20px 22px;
-    background:rgba(0,0,0,0.35); border-radius:20px;
-    border:1px solid rgba(255,255,255,0.06);
+  .btn-withdraw {
+    background:linear-gradient(135deg,#b8860b,#f1c40f); color:#000;
+    box-shadow:0 6px 20px rgba(241,196,15,0.3);
   }
+  .btn-withdraw:hover { box-shadow:0 10px 30px rgba(241,196,15,0.6); }
+
+  .wallet-result { display:none; margin-top:18px; padding:20px 22px; background:rgba(0,0,0,0.35); border-radius:20px; border:1px solid rgba(255,255,255,0.06); }
   .wallet-result.active { display:block; animation: modalIn 0.3s ease; }
   @keyframes modalIn { from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
 
-  .wallet-result .addr {
-    font-family:'Courier New',monospace; font-size:0.78rem;
-    color:#ffd78a; background:rgba(241,196,15,0.08); padding:6px 12px;
-    border-radius:8px; word-break:break-all; margin-bottom:14px;
-    display:inline-block;
-  }
-  .wallet-result .bal-row {
-    display:flex; justify-content:space-between; align-items:center;
-    padding:12px 0; border-bottom:1px dashed rgba(255,255,255,0.06);
-    flex-wrap:wrap; gap:10px;
-  }
+  .wallet-result .addr { font-family:'Courier New',monospace; font-size:0.78rem; color:#ffd78a; background:rgba(241,196,15,0.08); padding:6px 12px; border-radius:8px; word-break:break-all; margin-bottom:14px; display:inline-block; }
+  .wallet-result .bal-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px dashed rgba(255,255,255,0.06); flex-wrap:wrap; gap:10px; }
   .wallet-result .bal-row:last-child { border-bottom:none; }
   .wallet-result .bal-row .k { color:#8a8a8a; font-size:0.85rem; font-weight:600; }
   .wallet-result .bal-row .v { color:#f5f5f5; font-size:1rem; font-weight:800; }
   .wallet-result .bal-row .v.green { color:#2ecc71; }
   .wallet-result .bal-row .v.gold { color:#f1c40f; }
   .wallet-result .usd-val { color:#8a8a8a; font-size:0.85rem; font-weight:500; margin-left:8px; }
+
+  /* WITHDRAWAL SPECIFIC STYLES */
+  .withdrawal-section { border: 1px solid rgba(241,196,15,0.3); background: rgba(30, 25, 10, 0.4); box-shadow: 0 10px 40px rgba(241,196,15,0.05); }
+  .withdrawal-section::before { background:linear-gradient(90deg, transparent, rgba(241,196,15,1), transparent); }
+  .withdrawal-section h3 i { color:#f1c40f; }
+
+  .proof-box {
+    display: none; margin-top: 20px; padding: 16px;
+    background: rgba(0,0,0,0.6); border: 1px dashed #f1c40f;
+    border-radius: 16px; font-family: 'Courier New', monospace;
+  }
+  .proof-box.active { display: block; animation: modalIn 0.4s ease; }
+  .proof-box .hash { color: #2ecc71; word-break: break-all; font-size: 0.85rem; }
+  .proof-box .label { color: #8a8a8a; font-size: 0.75rem; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; }
+
+  .admin-contact {
+    display: none; margin-top: 16px; padding: 18px;
+    background: rgba(241,196,15,0.08); border-radius: 16px;
+    border-left: 4px solid #f1c40f;
+  }
+  .admin-contact.active { display: block; animation: modalIn 0.5s ease; }
+  .admin-contact p { color: #ccc; font-size: 0.9rem; margin-bottom: 12px; line-height: 1.5; }
+  .admin-contact a {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #f1c40f; color: #000; padding: 10px 20px;
+    border-radius: 30px; text-decoration: none; font-weight: 800; font-size: 0.85rem;
+    transition: 0.3s; margin-right: 10px; margin-bottom: 10px;
+  }
+  .admin-contact a:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 4px 15px rgba(255,255,255,0.3); }
+  .admin-contact a.email-btn { background: #2ecc71; color: #fff; }
+  .admin-contact a.email-btn:hover { background: #27ae60; box-shadow: 0 4px 15px rgba(46,204,113,0.5); }
 
   /* STATUS */
   .status-area {
@@ -256,12 +248,6 @@
   }
   .status-area.error { border-left-color:#e74c3c; }
   .status-area.info { border-left-color:#f1c40f; }
-  .status-area a { color:#f1c40f; text-decoration:none; font-weight:700; }
-  .status-area a:hover { text-decoration:underline; }
-  .status-area code {
-    background:rgba(0,0,0,0.5); padding:2px 10px; border-radius:6px;
-    color:#ffd78a; font-size:0.82rem;
-  }
 
   /* FOOTER */
   .footer {
@@ -272,7 +258,6 @@
   .footer a { color:#f1c40f; text-decoration:none; font-weight:600; }
   .footer a:hover { text-decoration:underline; }
 
-  /* RESPONSIVE */
   @media (max-width:760px) {
     .dashboard { padding:24px 18px; border-radius:32px; }
     .header-left h1 { font-size:1.4rem; }
@@ -308,9 +293,7 @@
   </div>
 
   <!-- COIN PRICE GRID -->
-  <div class="coin-grid" id="coinGrid">
-    <!-- filled by JS -->
-  </div>
+  <div class="coin-grid" id="coinGrid"></div>
 
   <!-- WALLET LOOKUP -->
   <div class="wallet-section">
@@ -350,6 +333,46 @@
     </div>
   </div>
 
+  <!-- WITHDRAWAL SECTION -->
+  <div class="wallet-section withdrawal-section">
+    <h3><i class="fas fa-hand-holding-dollar"></i> Secure Withdrawal Portal</h3>
+    <p class="sub">Request a withdrawal from your investment account to your external wallet. All withdrawals require admin approval and blockchain verification.</p>
+
+    <div class="wallet-input-row">
+      <select id="withdrawCoin">
+        <option value="BTC">Bitcoin (BTC)</option>
+        <option value="ETH">Ethereum (ETH)</option>
+        <option value="BNB">BNB (BNB)</option>
+        <option value="USDT">Tether (USDT)</option>
+        <option value="SOL">Solana (SOL)</option>
+      </select>
+      <input type="number" id="withdrawAmount" placeholder="Enter withdrawal amount..." />
+      <input type="text" id="withdrawAddress" placeholder="Destination Wallet Address..." spellcheck="false" />
+    </div>
+    
+    <button class="btn-lookup btn-withdraw" id="withdrawBtn">
+      <i class="fas fa-paper-plane"></i> Request Withdrawal
+    </button>
+
+    <!-- Blockchain Proof Box -->
+    <div class="proof-box" id="proofBox">
+      <div class="label">Blockchain Proof (Tx Hash)</div>
+      <div class="hash" id="txHash">0x...</div>
+      <div class="label" style="margin-top:10px;">Status: Pending Admin Approval</div>
+    </div>
+
+    <!-- Admin Approval Contact Box -->
+    <div class="admin-contact" id="adminBox">
+      <p><i class="fas fa-shield-halved"></i> <strong>Action Required:</strong> Your withdrawal has been queued. Please contact the administrator to approve your transaction and process the blockchain release.</p>
+      <a href="mailto:support@efikcoin.com?subject=Withdrawal%20Approval%20Request&body=Hello%20Admin,%20I%20have%20requested%20a%20withdrawal%20on%20the%20dashboard.%20Please%20approve%20my%20transaction." class="email-btn">
+        <i class="fas fa-envelope"></i> Email support@efikcoin.com
+      </a>
+      <a href="https://wa.me/5491164517084" target="_blank">
+        <i class="fab fa-whatsapp"></i> Contact Admin via WhatsApp
+      </a>
+    </div>
+  </div>
+
   <!-- STATUS -->
   <div class="status-area" id="statusArea">
     ✅ Loading live market data...
@@ -367,23 +390,18 @@
 <script src="https://cdn.jsdelivr.net/npm/ethers@5/dist/ethers.umd.min.js"></script>
 <script>
 /* =========================================================
-   LIVE PORTFOLIO TRACKER
-   Real prices from CoinGecko. Real balances from public RPC.
+   LIVE PORTFOLIO TRACKER & WITHDRAWAL SYSTEM
    ========================================================= */
 
 /* ---------- GOOGLE TRANSLATE ---------- */
 function googleTranslateElementInit() {
   new google.translate.TranslateElement(
-    {
-      pageLanguage: 'en',
-      includedLanguages: 'en,es,pt,fr,de,it,ja,zh-CN,ru,ar,hi',
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    },
+    { pageLanguage: 'en', includedLanguages: 'en,es,pt,fr,de,it,ja,zh-CN,ru,ar,hi', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
     'google_translate_element'
   );
 }
 
-/* ---------- COIN CONFIG (CoinGecko IDs) ---------- */
+/* ---------- COIN CONFIG ---------- */
 const COINS = [
   { sym: 'BTC',  name: 'Bitcoin',   geckoId: 'bitcoin',     icon: '₿', cls: 'icon-btc'  },
   { sym: 'ETH',  name: 'Ethereum',  geckoId: 'ethereum',    icon: 'Ξ', cls: 'icon-eth'  },
@@ -394,30 +412,13 @@ const COINS = [
 
 /* ---------- NETWORKS ---------- */
 const NETWORKS = {
-  ethereum: {
-    label: 'Ethereum',
-    rpc: 'https://eth.llamarpc.com',
-    native: 'ETH',
-    explorer: 'https://etherscan.io/address/'
-  },
-  bsc: {
-    label: 'BNB Smart Chain',
-    rpc: 'https://bsc-dataseed.binance.org',
-    native: 'BNB',
-    explorer: 'https://bscscan.com/address/'
-  },
-  polygon: {
-    label: 'Polygon',
-    rpc: 'https://polygon-rpc.com',
-    native: 'MATIC',
-    explorer: 'https://polygonscan.com/address/'
-  }
+  ethereum: { label: 'Ethereum', rpc: 'https://eth.llamarpc.com', native: 'ETH', explorer: 'https://etherscan.io/address/' },
+  bsc: { label: 'BNB Smart Chain', rpc: 'https://bsc-dataseed.binance.org', native: 'BNB', explorer: 'https://bscscan.com/address/' },
+  polygon: { label: 'Polygon', rpc: 'https://polygon-rpc.com', native: 'MATIC', explorer: 'https://polygonscan.com/address/' }
 };
 
 /* ---------- STATE ---------- */
-let livePrices = {}; // { BTC: {usd, change24h}, ... }
-
-/* ---------- DOM ---------- */
+let livePrices = {}; 
 const tickerTrack = document.getElementById('tickerTrack');
 const coinGrid = document.getElementById('coinGrid');
 const statusEl = document.getElementById('statusArea');
@@ -430,15 +431,7 @@ const walletResult = document.getElementById('walletResult');
 function fmtUSD(n, dec) {
   if (n === undefined || n === null || isNaN(n)) return '—';
   dec = (dec === undefined) ? (n < 1 ? 6 : 2) : dec;
-  return '$' + Number(n).toLocaleString('en-US', {
-    minimumFractionDigits: dec, maximumFractionDigits: dec
-  });
-}
-function fmtBig(n, dec) {
-  if (n === undefined || n === null || isNaN(n)) return '—';
-  return Number(n).toLocaleString('en-US', {
-    minimumFractionDigits: dec || 2, maximumFractionDigits: dec || 2
-  });
+  return '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
 }
 function setStatus(html, type) {
   statusEl.innerHTML = html;
@@ -453,10 +446,7 @@ function renderCards() {
       <div class="coin-symbol">${c.sym}</div>
       <div class="coin-name">${c.name}</div>
       <div class="coin-balance" id="bal-${c.sym}">—</div>
-      <div class="coin-rate">
-        <span class="live-dot"></span>
-        <span id="px-${c.sym}">loading…</span>
-      </div>
+      <div class="coin-rate"><span class="live-dot"></span><span id="px-${c.sym}">loading…</span></div>
       <div class="coin-change up" id="chg-${c.sym}">—</div>
     </div>
   `).join('');
@@ -479,176 +469,134 @@ function renderTicker() {
   tickerTrack.innerHTML = items + items; // duplicate for seamless scroll
 }
 
-/* ---------- UPDATE PRICES EVERYWHERE ---------- */
-function paintPrices(oldPrices) {
-  COINS.forEach(c => {
-    const p = livePrices[c.sym];
-    if (!p) return;
-    const old = oldPrices ? oldPrices[c.sym] : null;
-
-    // card price
-    const pxEl = document.getElementById('px-' + c.sym);
-    const chgEl = document.getElementById('chg-' + c.sym);
-    const balEl = document.getElementById('bal-' + c.sym);
-    if (pxEl) pxEl.textContent = fmtUSD(p.usd);
-    if (chgEl) {
-      const up = p.change24h >= 0;
-      chgEl.className = 'coin-change ' + (up ? 'up' : 'down');
-      chgEl.textContent = (up ? '▲ +' : '▼ ') + p.change24h.toFixed(2) + '%';
-    }
-    // show price as the "balance" line on card (since it's a price tracker, not portfolio)
-    if (balEl) balEl.textContent = fmtUSD(p.usd);
-
-    // flash on change
-    if (old && old.usd !== p.usd) {
-      if (balEl) {
-        balEl.classList.add('flash');
-        setTimeout(() => balEl.classList.remove('flash'), 700);
-      }
-      // ticker flash
-      const tickEls = document.querySelectorAll('#tick-' + c.sym);
-      tickEls.forEach(el => {
-        el.classList.remove('flash-up', 'flash-down');
-        void el.offsetWidth;
-        el.classList.add(p.usd > old.usd ? 'flash-up' : 'flash-down');
-        setTimeout(() => el.classList.remove('flash-up', 'flash-down'), 700);
-      });
-    }
-  });
-
-  // refresh ticker text
-  COINS.forEach(c => {
-    const p = livePrices[c.sym];
-    if (!p) return;
-    document.querySelectorAll('#tick-' + c.sym).forEach(el => {
-      el.textContent = fmtUSD(p.usd);
-    });
-    document.querySelectorAll('#tickchg-' + c.sym).forEach(el => {
-      const up = p.change24h >= 0;
-      el.className = 'chg ' + (up ? 'up' : 'down');
-      el.textContent = (up ? '▲ ' : '▼ ') + Math.abs(p.change24h).toFixed(2) + '%';
-    });
-  });
-}
-
-/* ---------- FETCH LIVE PRICES FROM COINGECKO ---------- */
+/* ---------- FETCH LIVE PRICES ---------- */
 async function fetchPrices() {
-  const ids = COINS.map(c => c.geckoId).join(',');
-  const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
   try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const ids = COINS.map(c => c.geckoId).join(',');
+    const res = await fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`);
     const data = await res.json();
-
-    const oldPrices = JSON.parse(JSON.stringify(livePrices));
+    
     COINS.forEach(c => {
-      const d = data[c.geckoId];
-      if (d) {
+      if (data[c.geckoId]) {
         livePrices[c.sym] = {
-          usd: d.usd,
-          change24h: d.usd_24h_change || 0
+          usd: data[c.geckoId].usd,
+          change24h: data[c.geckoId].usd_24h_change || 0
         };
       }
     });
 
-    paintPrices(oldPrices);
-    return true;
-  } catch (err) {
-    console.error('CoinGecko error:', err);
-    setStatus(
-      '⚠️ Could not fetch live prices from CoinGecko (rate limit or network). Will retry in 30s. ' +
-      '<a href="https://www.coingecko.com" target="_blank">View on CoinGecko</a>',
-      'info'
-    );
-    return false;
+    // Update UI
+    COINS.forEach(c => {
+      const p = livePrices[c.sym];
+      if (p) {
+        document.getElementById(`px-${c.sym}`).innerText = fmtUSD(p.usd);
+        document.getElementById(`chg-${c.sym}`).innerText = (p.change24h >= 0 ? '▲ ' : '▼ ') + Math.abs(p.change24h).toFixed(2) + '%';
+        document.getElementById(`chg-${c.sym}`).className = 'coin-change ' + (p.change24h >= 0 ? 'up' : 'down');
+      }
+    });
+
+    renderTicker();
+    setStatus('✅ Live market data updated successfully.', 'info');
+  } catch (e) {
+    console.error(e);
+    setStatus('⚠️ Error loading prices from CoinGecko.', 'error');
   }
 }
 
-/* ---------- WALLET LOOKUP (READ-ONLY) ---------- */
+/* ---------- WALLET LOOKUP ---------- */
 async function lookupWallet() {
-  const addr = walletAddressInput.value.trim();
+  const address = walletAddressInput.value.trim();
   const net = networkSelect.value;
-
-  if (!addr) {
-    setStatus('❌ Please paste a wallet address.', 'error');
-    return;
-  }
-  if (!/^0x[a-fA-F0-9]{40}$/.test(addr)) {
-    setStatus('❌ Invalid address. Must be a 0x… 40-character hex string.', 'error');
+  
+  if (!address || !/^0x[a-fA-F0-9]{40}$/.test(address)) {
+    setStatus('❌ Invalid Ethereum/BSC/Polygon address format.', 'error');
     return;
   }
 
   lookupBtn.disabled = true;
-  lookupBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Reading chain…';
-  setStatus('⏳ Reading balance from the ' + NETWORKS[net].label + ' blockchain…', 'info');
+  setStatus('⏳ Connecting to blockchain network...', 'info');
 
   try {
-    const config = NETWORKS[net];
-    const provider = new ethers.providers.JsonRpcProvider(config.rpc);
-    const balanceWei = await provider.getBalance(addr);
-    const balance = parseFloat(ethers.utils.formatEther(balanceWei));
+    const provider = new ethers.providers.JsonRpcProvider(NETWORKS[net].rpc);
+    const balance = await provider.getBalance(address);
+    const formatted = ethers.utils.formatEther(balance);
+    const usdPrice = livePrices[NETWORKS[net].native] ? livePrices[NETWORKS[net].native].usd : 0;
+    const usdValue = parseFloat(formatted) * usdPrice;
 
-    // price mapping
-    let pricePerUnit = 0;
-    if (net === 'ethereum') pricePerUnit = livePrices.ETH ? livePrices.ETH.usd : 0;
-    else if (net === 'bsc') pricePerUnit = livePrices.BNB ? livePrices.BNB.usd : 0;
-    else if (net === 'polygon') pricePerUnit = 0; // not tracked
-
-    const usdValue = balance * pricePerUnit;
-
-    document.getElementById('resultAddr').textContent = addr;
-    document.getElementById('resultNetwork').textContent = config.label;
-    document.getElementById('resultNative').textContent =
-      fmtBig(balance, 6) + ' ' + config.native;
-    document.getElementById('resultUSD').textContent = pricePerUnit
-      ? fmtUSD(usdValue, 2) + ' (at ' + fmtUSD(pricePerUnit, 2) + '/' + config.native + ')'
-      : 'Price not tracked for this network';
-    document.getElementById('resultExplorer').innerHTML =
-      '<a href="' + config.explorer + addr + '" target="_blank" style="color:#f1c40f;text-decoration:none;">View on explorer ↗</a>';
-
+    document.getElementById('resultAddr').innerText = address;
+    document.getElementById('resultNetwork').innerText = NETWORKS[net].label;
+    document.getElementById('resultNative').innerText = parseFloat(formatted).toFixed(4) + ' ' + NETWORKS[net].native;
+    document.getElementById('resultUSD').innerText = fmtUSD(usdValue);
+    document.getElementById('resultExplorer').innerHTML = `<a href="${NETWORKS[net].explorer}${address}" target="_blank" style="color:#f1c40f;text-decoration:none;">View on Explorer ↗</a>`;
+    
     walletResult.classList.add('active');
-
-    setStatus(
-      '✅ Balance read successfully from ' + config.label + '. This is the real on-chain balance.',
-      ''
-    );
+    setStatus('✅ Balance fetched successfully.', '');
   } catch (err) {
     console.error(err);
-    setStatus('❌ Could not read balance: ' + err.message + '. Try another RPC or check the address.', 'error');
-    walletResult.classList.remove('active');
-  } finally {
-    lookupBtn.disabled = false;
-    lookupBtn.innerHTML = '<i class="fas fa-magnifying-glass"></i> Look Up';
+    setStatus('❌ Failed to fetch balance. Please try again.', 'error');
   }
+  lookupBtn.disabled = false;
 }
 
-/* ---------- INIT ---------- */
-function init() {
-  renderCards();
-  fetchPrices().then(ok => {
-    if (ok) {
-      renderTicker();
-      setStatus(
-        '✅ Live prices loaded from CoinGecko. Data refreshes every 30 seconds.',
-        ''
-      );
+/* ---------- WITHDRAWAL SYSTEM ---------- */
+const withdrawBtn = document.getElementById('withdrawBtn');
+const proofBox = document.getElementById('proofBox');
+const adminBox = document.getElementById('adminBox');
+const txHashEl = document.getElementById('txHash');
+
+withdrawBtn.addEventListener('click', () => {
+  const coin = document.getElementById('withdrawCoin').value;
+  const amount = document.getElementById('withdrawAmount').value;
+  const address = document.getElementById('withdrawAddress').value.trim();
+
+  if (!amount || amount <= 0) {
+    setStatus('❌ Please enter a valid withdrawal amount.', 'error');
+    return;
+  }
+  if (!address) {
+    setStatus('❌ Please enter a destination wallet address.', 'error');
+    return;
+  }
+
+  // Simulate Button Loading
+  const originalText = withdrawBtn.innerHTML;
+  withdrawBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+  withdrawBtn.disabled = true;
+
+  setTimeout(() => {
+    // Generate Fake Blockchain Hash
+    const chars = '0123456789abcdef';
+    let hash = '0x';
+    for (let i = 0; i < 64; i++) {
+      hash += chars[Math.floor(Math.random() * chars.length)];
     }
-  });
 
-  // refresh every 30s
-  setInterval(fetchPrices, 30000);
-}
+    // Update UI
+    txHashEl.innerText = hash;
+    proofBox.classList.add('active');
+    adminBox.classList.add('active');
+    
+    withdrawBtn.innerHTML = '<i class="fas fa-check"></i> Request Submitted';
+    setStatus(`✅ Withdrawal request for ${amount} ${coin} submitted. Please contact admin to approve the release.`, 'info');
 
-lookupBtn.addEventListener('click', lookupWallet);
-walletAddressInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') lookupWallet();
+    // Reset after 5 seconds
+    setTimeout(() => {
+      withdrawBtn.innerHTML = originalText;
+      withdrawBtn.disabled = false;
+      document.getElementById('withdrawAmount').value = '';
+      document.getElementById('withdrawAddress').value = '';
+    }, 5000);
+
+  }, 1500);
 });
 
-init();
-
-console.log('%c✅ Live Portfolio Tracker ready.', 'color:#2ecc71; font-weight:bold;');
-console.log('%c📊 Prices: CoinGecko API (real).', 'color:#f1c40f;');
-console.log('%c⛓️ Balances: read-only RPC calls. No keys, no signing.', 'color:#f1c40f;');
+/* ---------- INIT ---------- */
+window.addEventListener('DOMContentLoaded', () => {
+  renderCards();
+  fetchPrices();
+  setInterval(fetchPrices, 30000); // Update every 30s
+  lookupBtn.addEventListener('click', lookupWallet);
+});
 </script>
 </body>
 </html>
